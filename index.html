@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Eats – Login</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/entry.css">
+</head>
+<body class="auth-page" data-page="login">
+
+  <main class="auth">
+    <div class="auth__photo" role="img" aria-label="Table full of dishes"></div>
+
+    <section class="auth__panel">
+      <div class="auth-card">
+        <p class="auth-card__logo">ECE EATS</p>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <h1 class="auth-card__title">Login</h1>
+
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input class="input" type="email" id="login-email" placeholder="Email" autocomplete="email">
+            <p class="field__error" id="login-email-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input class="input" type="password" id="login-password" placeholder="Password" autocomplete="current-password">
+            <p class="field__error" id="login-password-error"></p>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block auth-card__submit">Let’s Eat</button>
+
+          <div class="auth-card__links">
+            <a href="#" id="forgot-link">Forgot Password?</a>
+            <a href="register.html">Create an account</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/entry.js"></script>
+</body>
+</html>

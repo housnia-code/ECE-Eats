@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Eats Pro – Staff Login</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/entry.css">
+</head>
+<body class="auth-page" data-page="staff-login">
+
+  <main class="auth">
+    <div class="auth__photo auth__photo--staff" role="img" aria-label="Cafeteria kitchen"></div>
+
+    <section class="auth__panel">
+      <div class="auth-card">
+        <p class="auth-card__logo">ECE EATS PRO</p>
+        <p class="auth-card__subtitle">Staff Portal &amp; Kitchen Management</p>
+        <p class="auth-card__note">Restricted access for ECE Paris catering teams, cafeteria managers, and facilities staff.</p>
+
+        <form id="staff-login-form" novalidate>
+          <div class="field">
+            <label for="staff-email">Staff ID or Email Address</label>
+            <input class="input" type="text" id="staff-email" placeholder="Staff ID or email" autocomplete="username">
+            <p class="field__error" id="staff-email-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="staff-password">Password</label>
+            <input class="input" type="password" id="staff-password" placeholder="Password" autocomplete="current-password">
+            <p class="field__error" id="staff-password-error"></p>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block auth-card__submit">Access orders</button>
+
+          <div class="auth-card__links">
+            <a href="#" id="staff-forgot">Forgot Password?</a>
+            <a href="../index.html">Student login</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/entry.js"></script>
+</body>
+</html>
