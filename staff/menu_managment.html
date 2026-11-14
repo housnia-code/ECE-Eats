@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menu Management · ECE Eats Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/staff.css">
+</head>
+<body data-page="menu">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar" aria-label="Staff navigation">
+      <div class="brand">ECE EATS<br>Pro</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="orders.html">Orders</a>
+        <a href="menu_managment.html" aria-current="page">Menu management</a>
+      </nav>
+      <div class="sidebar-foot">
+        <button class="btn-dark" id="logout" type="button">Logout</button>
+        <div class="version">ECE Eats v2.4.0 • ECE Paris</div>
+      </div>
+    </aside>
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+      <span class="pill rest">Le CROUS Express</span>
+      <span class="pill live"><span aria-hidden="true">●</span> Lunch Service – Active</span>
+      <div class="top-icons"><span role="img" aria-label="Notifications">🔔</span><span role="img" aria-label="Profile">👤</span></div>
+    </header>
+    <main>
+      <div class="counters">
+        <div class="counter"><b id="mActive">0</b><span>Active Menu Items</span></div>
+        <div class="counter"><b id="mOut">0</b><span>Temporarily Out of Stock</span></div>
+      </div>
+      <h1>Menu Catalogue &amp; Stock Availability</h1>
+      <p class="sub">Manage inventory in real time.</p>
+      <button class="btn-dark" id="addDish" type="button">Add a dish +</button>
+      <div class="tools">
+        <label class="sr-only" for="mSearch">Search meals</label>
+        <input class="search" id="mSearch" type="search" placeholder="Search meals">
+        <div id="mFilters" role="group" aria-label="Filter by category" style="display:contents"></div>
+      </div>
+      <section class="panel">
+        <table>
+          <thead><tr><th>Item &amp; Culinary Specifications</th><th>Price</th><th>Remaining Stock</th><th>Action</th></tr></thead>
+          <tbody id="menuBody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="dishDialog" aria-labelledby="dlgTitle">
+    <form id="dishForm" method="dialog">
+      <h2 id="dlgTitle">Add a dish</h2>
+      <label>Name <input name="name" required maxlength="60"></label>
+      <label>Description <input name="desc" required maxlength="120"></label>
+      <label>Price (€) <input name="price" type="number" step="0.1" min="0.1" required></label>
+      <label>Stock <input name="stock" type="number" min="0" step="1" value="10" required></label>
+      <label>Category <select name="cat"><option>Panini</option><option>Salad</option><option>PokeBowls</option><option>Pasta</option></select></label>
+      <label>Dietary tag <select name="tag"><option value="">None</option><option>Halal</option><option>Vegetarian</option><option>Fish</option></select></label>
+      <div class="dlg-actions"><button class="btn-dark" type="submit">Save dish</button><button class="btn-ghost" type="button" id="dlgCancel">Cancel</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../js/staff.js"></script>
+</body>
+</html>
