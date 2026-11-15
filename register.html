@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ECE Eats campus food pre-ordering">
+  <title>ECE Eats | Register</title>
+  <link rel="stylesheet" href="css/student.css">
+  <script src="js/student.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">ECE EATS</a>
+    <nav class="main-nav" aria-label="Student navigation">
+      <a class="nav-link" href="menu.html">Menu</a>
+      <a class="nav-link" href="checkout.html">Checkout</a>
+      <a class="nav-link" href="myorders.html">My Orders</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="icon-button"id="trayShortcut" aria-label="Go to your tray">🛒 <span id="headerCartCount">0</span></button>
+      <a class="icon-button" href="register.html" aria-label="Student profile">👤</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <form id="registerForm" class="narrow form-card modal-card view">
+      <h1>Create your student account</h1>
+      <p class="muted">Demo interface only. Your details stay in this browser (localStorage).</p>
+      <label>Full name<input type="text" name="name" autocomplete="name" required placeholder="Alex Costa"></label>
+      <label>Student email<input name="email" type="email" autocomplete="email" required placeholder="alex.costa@edu.ece.fr"></label>
+      <label>Phone (SMS)<input name="phone" type="tel" autocomplete="tel" required placeholder="+33 6 00 00 00 00"></label>
+      <label>Promo and program<input type="text" name="promo" required placeholder="Promo 2026 · ING4 Cybersecurity"></label>
+      <button type="submit" class="btn btn-orange full-width">Create account</button>
+      <a class="text-button" href="menu.html">Skip and go to the menu</a>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>ECE EATS</strong><p>Official ECE Paris Campus Dining Platform.<br>Quick student meal ordering and nutritional information tracking.</p></div>
+    <div><strong>Site Campus</strong><p>Campus Eiffel 1 — 10 Rue Sextius Michel, 75015<br>Campus Eiffel 2 — 37 Quai de Grenelle, 75015<br>Campus Cœur Défense — Tour A, 92400 Courbevoie</p></div>
+    <div><strong>Support &amp; Maintenance</strong><p>Catering &amp; Facilities Office<br>Building E, Office 104<br>Office Hours: 8:30 AM – 5:00 PM</p></div>
+  </footer>
+  <div class="copyright">© 2026 Ecole Centrale d'Electronique (ECE Paris). ECE Eats Campus Dining Platform.</div>
+</body>
+</html>
