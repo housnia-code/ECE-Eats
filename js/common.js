@@ -44,7 +44,7 @@ function renderNav() {
   const active = document.body.dataset.nav;
   const link = (key, label, href) =>
     `<a class="nav-pill${active === key ? " is-active" : ""}" href="${BASE}${href}">${label}</a>`;
-  const trayCount = getJSON("ece_tray", []).reduce((n, i) => n + i.qty, 0);
+  const trayCount = getJSON("ece_tray", []).reduce((n, i) => n + (i.quantity ?? i.qty ?? 0), 0);
 
   el.className = "navbar";
   el.innerHTML = `
@@ -103,6 +103,17 @@ function renderFooter() {
       </div>
       <p class="footer__legal">© 2026 École Centrale d’Électronique (ECE Paris). ECE Eats Connected Dining System</p>
     </div>`;
+}
+
+/* Refresh the cart badge in the nav bar (called by the tray code after every change) */
+function updateCartBadge() {
+  const n = getJSON("ece_tray", []).reduce((s, i) => s + (i.quantity ?? i.qty ?? 0), 0);
+  const link = document.querySelector('.navbar__actions a[aria-label="Cart"]');
+  if (!link) return;
+  let badge = link.querySelector(".badge");
+  if (!n) { if (badge) badge.remove(); return; }
+  if (!badge) { badge = document.createElement("span"); badge.className = "badge"; link.appendChild(badge); }
+  badge.textContent = n;
 }
 
 document.addEventListener("DOMContentLoaded", () => { requireLogin(); renderNav(); renderFooter(); });

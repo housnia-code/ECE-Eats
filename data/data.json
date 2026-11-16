@@ -20,11 +20,38 @@
       "tags": ["Healthy", "Fresh", "Pokebowls"], "openUntil": "18:00", "open": true, "wait": 30, "crowd": "high", "rating": 4.1, "reviews": 100, "image": "images/cafeterias/green-bowl.jpg" }
   ],
   "dishes": [
-    { "id": 1, "cafeteriaId": 1, "name": "Chicken Caesar Salad", "category": "Salads", "price": 6.5, "tags": ["Halal"], "image": "images/dishes/chicken-caesar-salad.jpg" },
-    { "id": 2, "cafeteriaId": 1, "name": "Ham & Cheese Panini", "category": "Paninis", "price": 4.5, "tags": [], "image": "images/dishes/ham-cheese-panini.jpg" },
-    { "id": 3, "cafeteriaId": 1, "name": "Mediterranean Vegetarian Salad", "category": "Salads", "price": 6.5, "tags": ["Vegetarian"], "image": "images/dishes/mediterranean-salad.jpg" },
-    { "id": 4, "cafeteriaId": 1, "name": "Chicken & Mozzarella Panini", "category": "Paninis", "price": 4.5, "tags": ["Halal"], "image": "images/dishes/chicken-mozzarella-panini.jpg" }
-  ],
+  { "id": 1,  "cafeteriaId": 1, "name": "Chicken Caesar Salad", "category": "Salads", "price": 6.5, "tags": ["Halal"], "description": "Grilled chicken, lettuce, Parmesan, croutons and Caesar dressing.", "available": true, "image": "images/dishes/chicken-caesar-salad.jpg" },
+  { "id": 2,  "cafeteriaId": 1, "name": "Ham & Cheese Panini", "category": "Paninis", "price": 4.5, "tags": [], "description": "Ham, Emmental cheese and butter.", "available": true, "image": "images/dishes/ham-cheese-panini.jpg" },
+  { "id": 3,  "cafeteriaId": 1, "name": "Mediterranean Vegetarian Salad", "category": "Salads", "price": 6.5, "tags": ["Vegetarian"], "description": "Quinoa, chickpeas, cucumber, cherry tomatoes and feta.", "available": true, "image": "images/dishes/mediterranean-salad.jpg" },
+  { "id": 4,  "cafeteriaId": 1, "name": "Chicken & Mozzarella Panini", "category": "Paninis", "price": 4.5, "tags": ["Halal"], "description": "Grilled chicken, mozzarella, tomatoes and pesto.", "available": true, "image": "images/dishes/chicken-mozzarella-panini.jpg" },
+  { "id": 25, "cafeteriaId": 1, "name": "Salmon Poke Bowl", "category": "Poke bowls", "price": 8.5, "tags": [], "description": "Salmon, rice, avocado and fresh vegetables.", "available": true, "image": "images/dishes/salmon-poke.jpg" },
+  { "id": 26, "cafeteriaId": 1, "name": "Fresh Orange Juice", "category": "Drinks", "price": 2.5, "tags": ["Vegetarian"], "description": "Freshly squeezed orange juice.", "available": false, "image": "images/dishes/orange-juice.jpg" },
+
+  { "id": 5,  "cafeteriaId": 2, "name": "Cappuccino", "category": "Drinks", "price": 2.2, "tags": [], "description": "Espresso with steamed milk and a light foam.", "available": true, "image": "images/dishes/cappuccino.jpg" },
+  { "id": 6,  "cafeteriaId": 2, "name": "Fresh Orange Juice", "category": "Drinks", "price": 3.0, "tags": [], "description": "Freshly squeezed orange juice.", "available": true, "image": "images/dishes/orange-juice.jpg" },
+  { "id": 7,  "cafeteriaId": 2, "name": "Tomato Mozzarella Panini", "category": "Paninis", "price": 4.5, "tags": ["Vegetarian"], "description": "Tomatoes, mozzarella, basil and olive oil.", "available": true, "image": "images/dishes/tomato-mozzarella-panini.jpg" },
+  { "id": 8,  "cafeteriaId": 2, "name": "Chocolate Brownie", "category": "Desserts", "price": 2.8, "tags": [], "description": "Warm chocolate brownie with walnuts.", "available": true, "image": "images/dishes/brownie.jpg" },
+
+  { "id": 9,  "cafeteriaId": 3, "name": "Beef Burger", "category": "Burgers", "price": 7.5, "tags": ["Halal"], "description": "Beef patty, cheddar, lettuce, tomato and house sauce.", "available": true, "image": "images/dishes/beef-burger.jpg" },
+  { "id": 10, "cafeteriaId": 3, "name": "Chicken Wrap", "category": "Wraps", "price": 5.5, "tags": ["Halal"], "description": "Grilled chicken, crisp salad, tomato and garlic sauce.", "available": true, "image": "images/dishes/chicken-wrap.jpg" },
+  { "id": 11, "cafeteriaId": 3, "name": "Falafel Wrap", "category": "Wraps", "price": 5.5, "tags": ["Vegetarian", "Vegan"], "description": "Falafel, hummus, pickled cabbage and fresh vegetables.", "available": true, "image": "images/dishes/falafel-wrap.jpg" },
+  { "id": 12, "cafeteriaId": 3, "name": "Penne Arrabbiata", "category": "Pasta", "price": 6.5, "tags": ["Vegetarian"], "description": "Penne in a spicy tomato and garlic sauce.", "available": true, "image": "images/dishes/penne-arrabbiata.jpg" },
+
+  { "id": 13, "cafeteriaId": 4, "name": "Spaghetti Bolognese", "category": "Pasta", "price": 7.0, "tags": [], "description": "Spaghetti with slow-cooked beef and tomato sauce.", "available": true, "image": "images/dishes/spaghetti-bolognese.jpg" },
+  { "id": 14, "cafeteriaId": 4, "name": "Penne Pesto", "category": "Pasta", "price": 6.5, "tags": ["Vegetarian"], "description": "Penne with basil pesto, pine nuts and Parmesan.", "available": true, "image": "images/dishes/penne-pesto.jpg" },
+  { "id": 15, "cafeteriaId": 4, "name": "Tagliatelle Carbonara", "category": "Pasta", "price": 7.0, "tags": [], "description": "Tagliatelle, cream, bacon and Parmesan.", "available": true, "image": "images/dishes/carbonara.jpg" },
+  { "id": 16, "cafeteriaId": 4, "name": "Tiramisu", "category": "Desserts", "price": 3.5, "tags": [], "description": "Coffee-soaked sponge with mascarpone cream.", "available": true, "image": "images/dishes/tiramisu.jpg" },
+
+  { "id": 17, "cafeteriaId": 5, "name": "Tuna Crunch Sandwich", "category": "Sandwiches", "price": 4.8, "tags": [], "description": "Tuna, lettuce, tomato and light mayonnaise.", "available": true, "image": "images/dishes/tuna-sandwich.jpg" },
+  { "id": 18, "cafeteriaId": 5, "name": "Chicken Avocado Sandwich", "category": "Sandwiches", "price": 5.2, "tags": ["Halal"], "description": "Grilled chicken, avocado and fresh salad.", "available": true, "image": "images/dishes/chicken-avocado-sandwich.jpg" },
+  { "id": 19, "cafeteriaId": 5, "name": "Garden Salad", "category": "Salads", "price": 5.5, "tags": ["Vegetarian"], "description": "Mixed leaves, cucumber, tomato, carrot and vinaigrette.", "available": true, "image": "images/dishes/garden-salad.jpg" },
+  { "id": 20, "cafeteriaId": 5, "name": "Homemade Lemonade", "category": "Drinks", "price": 2.5, "tags": [], "description": "Fresh lemon, mint and a touch of sugar.", "available": true, "image": "images/dishes/lemonade.jpg" },
+
+  { "id": 21, "cafeteriaId": 6, "name": "Salmon Poke Bowl", "category": "Poke bowls", "price": 8.5, "tags": [], "description": "Salmon, rice, avocado and fresh vegetables.", "available": true, "image": "images/dishes/salmon-poke.jpg" },
+  { "id": 22, "cafeteriaId": 6, "name": "Veggie Poke Bowl", "category": "Poke bowls", "price": 7.5, "tags": ["Vegetarian", "Vegan"], "description": "Rice, edamame, avocado, carrot and sesame.", "available": true, "image": "images/dishes/veggie-poke.jpg" },
+  { "id": 23, "cafeteriaId": 6, "name": "Chicken Teriyaki Bowl", "category": "Poke bowls", "price": 8.0, "tags": ["Halal"], "description": "Teriyaki chicken, rice, corn and green onions.", "available": true, "image": "images/dishes/chicken-teriyaki-bowl.jpg" },
+  { "id": 24, "cafeteriaId": 6, "name": "Green Smoothie", "category": "Drinks", "price": 3.5, "tags": ["Vegan"], "description": "Spinach, apple, banana and lime.", "available": true, "image": "images/dishes/green-smoothie.jpg" }
+],
   "popularDishIds": [1, 2, 3],
   "demoOrder": { "id": "ece-2848", "cafeteriaId": 1, "place": "Building 2 level -1", "time": "12h04", "items": "1× Ham & Cheese panini + 1× Chicken Caesar Salad + 1× Eau Cristaline", "total": 11, "status": "ready" },
   "users": [
