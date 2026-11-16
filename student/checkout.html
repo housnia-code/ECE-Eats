@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ECE Eats campus food pre-ordering">
+  <title>ECE Eats | Checkout</title>
+  <link rel="stylesheet" href="css/student.css">
+  <script src="js/student.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">ECE EATS</a>
+    <nav class="main-nav" aria-label="Student navigation">
+      <a class="nav-link" href="menu.html">Menu</a>
+      <a class="nav-link active" href="checkout.html">Checkout</a>
+      <a class="nav-link" href="myorders.html">My Orders</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="icon-button" id="trayShortcut" aria-label="Go to your tray">🛒 <span id="headerCartCount">0</span></button>
+      <a class="icon-button" href="register.html" aria-label="Student profile">👤</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="view">
+      <div class="breadcrumb">Cafeterias <span>›</span> Le CROUS Express <span>›</span> Checkout</div>
+      <h1>Complete Your Campus Order</h1>
+      <p class="subtitle">Review your order and choose a pickup time.</p>
+      <div class="checkout-layout">
+        <div class="checkout-main">
+          <section class="form-card">
+            <h3><span class="step-number">1</span> Pickup location</h3>
+            <div class="location-card"><strong>Le CROUS Express</strong><span>Building 2 · Level -1, near the FabLab</span></div>
+          </section>
+          <section class="form-card">
+            <h3><span class="step-number">2</span> Select Time Slot</h3>
+            <div class="time-grid" id="timeSlots">
+              <button type="button" class="time-slot selected" data-time="ASAP">ASAP</button>
+              <button type="button" class="time-slot" data-time="13:00">13:00</button>
+              <button type="button" class="time-slot" data-time="13:30">13:30</button>
+              <button type="button" class="time-slot" data-time="14:00">14:00</button>
+              <button type="button" class="time-slot" data-time="14:30">14:30</button>
+              <button type="button" class="time-slot" data-time="15:00">15:00</button>
+              <button type="button" class="time-slot" data-time="15:30">15:30</button>
+              <button type="button" class="time-slot" data-time="16:00">16:00</button>
+            </div>
+          </section>
+          <section class="form-card">
+            <h3><span class="step-number">3</span> Student Identity</h3>
+            <div class="identity-grid">
+              <div class="identity-card"><strong id="studentName">Alex Costa</strong><span id="studentInfo">Promo 2026 · ING4 Cybersecurity</span></div>
+              <div class="identity-card"><strong id="studentPhone">SMS: +33 6 89 52 02 69</strong><span id="studentEmail">Email: alex.costa@edu.ece.fr</span></div>
+            </div>
+          </section>
+          <section class="form-card">
+            <h3><span class="step-number">4</span> Payment Method</h3>
+            <div class="payment-options">
+              <label class="payment-option selected"><input type="radio" name="payment" value="card" checked><span><strong>Bank Card CB / Visa / Mastercard</strong><small>3D Secure 2.0 · Authentication via your banking app</small></span></label>
+              <label class="payment-option"><input type="radio" name="payment" value="wallet"><span><strong>Apple Pay / Google Pay</strong></span></label>
+              <label class="payment-option"><input type="radio" name="payment" value="pickup"><span><strong>Pay at pickup</strong></span></label>
+            </div>
+          </section>
+          <p id="checkoutError" class="error-message" role="alert"></p>
+          <button type="button" class="btn btn-dark confirm-order" id="confirmOrder">Confirm Order · <span id="checkoutTotal">€0.00</span></button>
+          <a class="text-button back-to-menu" href="menu.html">← Back to menu</a>
+        </div>
+        <aside class="tray-panel checkout-tray">
+          <div class="tray-heading"><h2>♧ Your tray</h2><span id="checkoutCount">0 items</span></div>
+          <div id="checkoutItems" class="tray-items"></div>
+          <div class="tray-total"><strong>TOTAL to pay:</strong><strong id="checkoutTrayTotal">€0.00</strong></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>ECE EATS</strong><p>Official ECE Paris Campus Dining Platform.<br>Quick student meal ordering and nutritional information tracking.</p></div>
+    <div><strong>Site Campus</strong><p>Campus Eiffel 1 — 10 Rue Sextius Michel, 75015<br>Campus Eiffel 2 — 37 Quai de Grenelle, 75015<br>Campus Cœur Défense — Tour A, 92400 Courbevoie</p></div>
+    <div><strong>Support &amp; Maintenance</strong><p>Catering &amp; Facilities Office<br>Building E, Office 104<br>Office Hours: 8:30 AM – 5:00 PM</p></div>
+  </footer>
+  <div class="copyright">© 2026 Ecole Centrale d'Electronique (ECE Paris). ECE Eats Campus Dining Platform.</div>
+
+  <dialog id="cardDialog" class="modal">
+    <form method="dialog" class="modal-card" id="cardForm">
+      <button type="button" class="modal-close" aria-label="Close" onclick="this.closest('dialog').close()">×</button>.
+      <h2>Bank card details</h2>
+      <p class="muted">Demo interface only. Do not enter real payment details.</p>
+      <label>Cardholder name<input type="text" id="cardName" autocomplete="cc-name" required placeholder="Name on card"></label>
+      <label>Card number<input type="text" id="cardNumber" inputmode="numeric" maxlength="19" required placeholder="4242 4242 4242 4242"></label>
+      <div class="two-fields"><label>Expiry<input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required></label><label>CVV<input type="text"  id="cardCvv" inputmode="numeric" maxlength="4" placeholder="123" required></label></div>
+      <button type="submit" class="btn btn-orange full-width" id="saveCard" value="save">Continue (demo)</button>
+    </form>
+  </dialog>
+
+  <dialog id="confirmationDialog" class="modal">
+    <div class="modal-card confirmation-card">
+      <div class="success-mark">✓</div>
+      <h2>Order confirmed!</h2>
+      <p>Your order has been placed successfully.</p>
+      <div id="confirmationDetails" class="confirmation-details"></div>
+      <button type="button" class="btn btn-dark full-width" id="viewMyOrders">View my orders</button>
+    </div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

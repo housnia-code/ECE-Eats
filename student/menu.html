@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ECE Eats campus food pre-ordering">
+  <title>ECE Eats | Menu</title>
+  <link rel="stylesheet" href="css/student.css">
+  <script src="js/student.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">ECE EATS</a>
+    <nav class="main-nav" aria-label="Student navigation">
+      <a class="nav-link active" href="menu.html">Menu</a>
+      <a class="nav-link" href="checkout.html">Checkout</a>
+      <a class="nav-link" href="myorders.html">My Orders</a>
+    </nav>
+    <div class="header-actions">
+      <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search food..." aria-label="Search food"></label>
+      <button type="button" class="icon-button"id="trayShortcut" aria-label="Go to your tray">🛒 <span id="headerCartCount">0</span></button>
+      <a class="icon-button" href="register.html" aria-label="Student profile">👤</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="view">
+      <div class="breadcrumb">Home <span>›</span> Cafeterias <span>›</span> Le CROUS Express</div>
+      <section class="cafeteria-heading">
+        <div>
+          <h1>Le CROUS Express</h1>
+          <p class="location">Building 2 · Level -1, near the FabLab</p>
+          <p class="description">Artisan sandwiches, freshly toasted paninis, fresh mixed salads, and balanced poke bowls.</p>
+        </div>
+        <div class="cafeteria-badges">
+          <span class="pill peach">Open now</span>
+          <span class="pill peach">Campus Eiffel 2</span>
+          <span class="pill green">8 minute wait · Low crowd</span>
+        </div>
+      </section>
+
+      <div class="category-bar" id="categoryBar" >
+        <button type="button" class="category active" data-category="All">All meals</button>
+        <button type="button" class="category" data-category="Paninis">Paninis</button>
+        <button type="button" class="category" data-category="Salads">Salads</button>
+        <button type="button" class="category" data-category="Poke bowls">Poke bowls</button>
+        <button type="button" class="category" data-category="Drinks">Drinks</button>
+      </div>
+
+      <div class="ordering-layout">
+        <section class="menu-list" aria-label="Menu items">
+          <div id="menuGroups"></div>
+        </section>
+        <aside class="tray-panel" id="trayPanel">
+          <div class="tray-heading"><h2>♧ Your tray</h2><span id="trayItemCount">0 items</span></div>
+          <div id="trayItems" class="tray-items"><p class="empty-state">Your tray is empty. Add something delicious!</p></div>
+          <div class="tray-total"><strong>TOTAL to pay:</strong><strong id="trayTotal">€0.00</strong></div>
+          <button type="button" class="btn btn-dark full-width" id="goCheckout" disabled>Checkout</button>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>ECE EATS</strong><p>Official ECE Paris Campus Dining Platform.<br>Quick student meal ordering and nutritional information tracking.</p></div>
+    <div><strong>Site Campus</strong><p>Campus Eiffel 1 — 10 Rue Sextius Michel, 75015<br>Campus Eiffel 2 — 37 Quai de Grenelle, 75015<br>Campus Cœur Défense — Tour A, 92400 Courbevoie</p></div>
+    <div><strong>Support &amp; Maintenance</strong><p>Catering &amp; Facilities Office<br>Building E, Office 104<br>Office Hours: 8:30 AM – 5:00 PM</p></div>
+  </footer>
+  <div class="copyright">© 2026 Ecole Centrale d'Electronique (ECE Paris). ECE Eats Campus Dining Platform.</div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
