@@ -14,7 +14,7 @@
       "tags": ["Pasta", "Italian", "Vegetarian"], "openUntil": "16:00", "open": true, "wait": 4, "crowd": "low", "rating": 4.6, "reviews": 185, "image": "images/cafeterias/pasta-corner.jpg" },
     { "id": 5, "name": "La Pause Gourmande", "campus": "Eiffel 1", "location": "Building 1 • Level 2",
       "description": "Freshly prepared sandwiches, homemade salads, and refreshing drinks for a quick and balanced meal.",
-      "tags": ["Sandwich", "Salad", "Drinks"], "openUntil": "14:00", "open": true, "wait": 15, "crowd": "medium", "rating": 4.2, "reviews": 250, "image": "images/cafeterias/pause-gourmande.jpg" },
+      "tags": ["Sandwich", "Salad", "Drinks"], "openUntil": "14:00", "open": false, "wait": 15, "crowd": "medium", "rating": 4.2, "reviews": 250, "image": "images/cafeterias/pause-gourmande.jpg" },
     { "id": 6, "name": "Le Green Bowl", "campus": "Cœur Défense", "location": "Tour Cœur Défense • Hall Principal Floor 2",
       "description": "Colourful poke bowls, crisp seasonal vegetables, and refreshing options for a fresh and balanced lunch.",
       "tags": ["Healthy", "Fresh", "Pokebowls"], "openUntil": "18:00", "open": true, "wait": 30, "crowd": "high", "rating": 4.1, "reviews": 100, "image": "images/cafeterias/green-bowl.jpg" }

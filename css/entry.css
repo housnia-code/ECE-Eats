@@ -13,21 +13,24 @@
 }
 
 .auth__photo {
-  flex: 0 0 46%;
+  flex: 0 0 60%;                  /* wider, so it runs under the whole curve */
   background:
-    url("../images/Share_food.jpg") center / cover no-repeat,
+    url("../images/share_food.jpg") center / cover no-repeat,
     var(--sand);
 }
 
-/* Orange panel with the big curved left edge (check the radius in Figma) */
+/* Orange panel with the big curved left edge */
 .auth__panel {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: grid;
   place-items: center;
-  margin-left: -12%;
+  margin-left: -26%;              /* panel still starts at 34% of the width, as before */
   padding: var(--space-6) var(--space-6) var(--space-6) 12%;
   background: var(--orange);
   border-radius: 22% 0 0 22% / 50% 0 0 50%;
+  box-shadow: 0 4px 50px 50px rgba(43, 33, 24, 0.75);   /* Figma drop shadow */
 }
 
 .auth-card {
@@ -78,6 +81,7 @@
 .auth-card__links a:hover,
 .auth-card__staff a:hover { color: var(--orange-dark); text-decoration: underline; }
 
+
 .auth-card__staff {
   margin-top: var(--space-3);
   font-size: var(--fs-sm);
@@ -85,10 +89,12 @@
 }
 .auth-card__staff a { color: var(--orange-dark); font-weight: 500; }
 
+
+
 /* ---------- Tablet ---------- */
 @media (max-width: 1024px) {
-  .auth__photo { flex-basis: 38%; }
-  .auth__panel { margin-left: -10%; padding-left: 10%; }
+  .auth__photo { flex-basis: 52%; }
+  .auth__panel { margin-left: -24%; padding-left: 10%; }
 }
 
 /* ---------- Mobile: photo becomes a banner, panel is full width ---------- */
@@ -109,7 +115,7 @@
 /* ---------- Staff login extras ---------- */
 .auth__photo--staff {
   background:
-    url("../images/staff-bg.jpg") center / cover no-repeat,
+    url("../images/share_food.jpg") center / cover no-repeat,
     var(--sand);
 }
 .auth-card__subtitle { margin-top: var(--space-2); text-align: center; font-size: var(--fs-md); font-weight: 500; }

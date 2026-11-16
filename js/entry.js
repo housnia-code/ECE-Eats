@@ -239,14 +239,18 @@ async function initCafeterias() {
   if (q) searchInput.value = q;
 
   function render() {
-    const term = searchInput.value.trim().toLowerCase();
-    const list = data.cafeterias.filter((c) => {
-      const inCampus = campus === "all" || c.campus === campus;
-      const text = [c.name, c.campus, c.location, c.description, ...c.tags].join(" ").toLowerCase();
-      return inCampus && (!term || text.includes(term));
-    });
-    grid.innerHTML = list.map((c) => renderCafeCard(c, true)).join("");
-    empty.classList.toggle("hidden", list.length > 0);
+  const term = searchInput.value.trim().toLowerCase();
+  const list = data.cafeterias.filter((c) => {
+    const inCampus = campus === "all" || c.campus === campus;
+    const dishText = data.dishes
+      .filter((d) => d.cafeteriaId === c.id)
+      .map((d) => [d.name, d.category, ...d.tags].join(" "))
+      .join(" ");
+    const text = [c.name, c.campus, c.location, c.description, ...c.tags, dishText].join(" ").toLowerCase();
+    return inCampus && (!term || text.includes(term));
+  });
+  grid.innerHTML = list.map((c) => renderCafeCard(c, true)).join("");
+  empty.classList.toggle("hidden", list.length > 0);
   }
 
   document.getElementById("campus-filters").addEventListener("click", (e) => {
