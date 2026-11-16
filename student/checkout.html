@@ -5,36 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ECE Eats campus food pre-ordering">
   <title>ECE Eats | Checkout</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/student.css">
-  <script src="../js/student.js" defer></script>
+  <link rel="stylesheet" href="../css/style.css?v=3">
+  <link rel="stylesheet" href="../css/student.css?v=3">
 </head>
-<body>
+<body data-page="checkout" data-nav="checkout" data-auth="student">
   <header id="site-header"></header>
-  <header class="topbar">
-    <a class="brand" href="index.html">ECE EATS</a>
-    <nav class="main-nav" aria-label="Student navigation">
-      <a class="nav-link" href="menu.html">Menu</a>
-      <a class="nav-link active" href="checkout.html">Checkout</a>
-      <a class="nav-link" href="myorders.html">My Orders</a>
-    </nav>
-    <div class="header-actions">
-      <button type="button" class="icon-button" id="trayShortcut" aria-label="Go to your tray">🛒 <span id="headerCartCount">0</span></button>
-      <a class="icon-button" href="register.html" aria-label="Student profile">👤</a>
-    </div>
-  </header>
 
   <main class="container">
     <section class="view">
-      <div class="breadcrumb">Cafeterias <span>›</span> Le CROUS Express <span>›</span> Checkout</div>
+      <div class="breadcrumb"><a href="../main/cafeterias.html">Cafeterias</a> <span>›</span> <span id="crumbCafe">Le CROUS Express</span> <span>›</span> Checkout</div>
       <h1>Complete Your Campus Order</h1>
       <p class="subtitle">Review your order and choose a pickup time.</p>
       <div class="checkout-layout">
         <div class="checkout-main">
           <section class="form-card">
             <h3><span class="step-number">1</span> Pickup location</h3>
-            <div class="location-card"><strong>Le CROUS Express</strong><span>Building 2 · Level -1, near the FabLab</span></div>
+            <div class="location-card"><strong id="pickupName">Le CROUS Express</strong><span id="pickupPlace">Building 2 · Level -1, near the FabLab</span></div>
           </section>
           <section class="form-card">
             <h3><span class="step-number">2</span> Select Time Slot</h3>
@@ -65,34 +51,29 @@
             </div>
           </section>
           <p id="checkoutError" class="error-message" role="alert"></p>
-          <button type="button" class="btn btn-dark confirm-order" id="confirmOrder">Confirm Order · <span id="checkoutTotal">€0.00</span></button>
+          <button type="button" class="btn btn-dark confirm-order" id="confirmOrder">Confirm Order · <span id="checkoutTotal">0,00 €</span></button>
           <a class="text-button back-to-menu" href="menu.html">← Back to menu</a>
         </div>
         <aside class="tray-panel checkout-tray">
           <div class="tray-heading"><h2>♧ Your tray</h2><span id="checkoutCount">0 items</span></div>
           <div id="checkoutItems" class="tray-items"></div>
-          <div class="tray-total"><strong>TOTAL to pay:</strong><strong id="checkoutTrayTotal">€0.00</strong></div>
+          <div class="tray-total"><strong>TOTAL to pay:</strong><strong id="checkoutTrayTotal">0,00 €</strong></div>
         </aside>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div><strong>ECE EATS</strong><p>Official ECE Paris Campus Dining Platform.<br>Quick student meal ordering and nutritional information tracking.</p></div>
-    <div><strong>Site Campus</strong><p>Campus Eiffel 1 — 10 Rue Sextius Michel, 75015<br>Campus Eiffel 2 — 37 Quai de Grenelle, 75015<br>Campus Cœur Défense — Tour A, 92400 Courbevoie</p></div>
-    <div><strong>Support &amp; Maintenance</strong><p>Catering &amp; Facilities Office<br>Building E, Office 104<br>Office Hours: 8:30 AM – 5:00 PM</p></div>
-  </footer>
-  <div class="copyright">© 2026 Ecole Centrale d'Electronique (ECE Paris). ECE Eats Campus Dining Platform.</div>
+  <footer id="site-footer"></footer>
 
   <dialog id="cardDialog" class="modal">
     <form method="dialog" class="modal-card" id="cardForm">
-      <button type="button" class="modal-close" aria-label="Close" onclick="this.closest('dialog').close()">×</button>.
-      <h2>Bank card details</h2>
+      <button type="button" class="modal-close" aria-label="Close" onclick="this.closest('dialog').close()">×</button>
+      <h2>Enter Your Card Details</h2>
       <p class="muted">Demo interface only. Do not enter real payment details.</p>
-      <label>Cardholder name<input type="text" id="cardName" autocomplete="cc-name" required placeholder="Name on card"></label>
+      <label>Cardholder's full name<input type="text" id="cardName" autocomplete="cc-name" required placeholder="Name on card"></label>
       <label>Card number<input type="text" id="cardNumber" inputmode="numeric" maxlength="19" required placeholder="4242 4242 4242 4242"></label>
-      <div class="two-fields"><label>Expiry<input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required></label><label>CVV<input type="text"  id="cardCvv" inputmode="numeric" maxlength="4" placeholder="123" required></label></div>
-      <button type="submit" class="btn btn-orange full-width" id="saveCard" value="save">Continue (demo)</button>
+      <div class="two-fields"><label>Expiry<input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required></label><label>CVV<input type="text" id="cardCvv" inputmode="numeric" maxlength="4" placeholder="123" required></label></div>
+      <button type="submit" class="btn btn-dark full-width" id="saveCard">Pay · <span id="payTotal">0,00 €</span></button>
     </form>
   </dialog>
 
@@ -102,10 +83,14 @@
       <h2>Order confirmed!</h2>
       <p>Your order has been placed successfully.</p>
       <div id="confirmationDetails" class="confirmation-details"></div>
-      <button type="button" class="btn btn-dark full-width" id="viewMyOrders">View my orders</button>
+      <p class="muted">You'll get an SMS when your order is ready.</p>
+      <button type="button" class="btn btn-dark full-width" id="viewMyOrders">Track my order</button>
+      <a class="text-button" href="../main/home.html">Back to homepage</a>
     </div>
   </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/common.js?v=3"></script>
+  <script src="../js/student.js?v=3"></script>
 </body>
-<script src="../js/common.js"></script>
 </html>

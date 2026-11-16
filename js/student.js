@@ -114,13 +114,18 @@ function setupEvents() {
     $("cardDialog").close(); createOrder();
   });
   on("cardNumber", "input", event => { event.target.value = event.target.value.replace(/\D/g, "").slice(0, 16).replace(/(\d{4})(?=\d)/g, "$1 "); });
-  on("viewMyOrders", "click", () => go("myorders.html"));
-  on("registerForm", "submit", event => { // register.html: keep the student profile in localStorage
-    event.preventDefault(); localStorage.setItem(STORAGE_STUDENT, JSON.stringify(Object.fromEntries(new FormData(event.target)))); go("menu.html");
-  });
-  const student = read(STORAGE_STUDENT, null); // checkout.html: show the registered student
-  if (student) { set("studentName", student.name); set("studentInfo", student.promo); set("studentPhone", "SMS: " + student.phone); set("studentEmail", "Email: " + student.email); }
-}
+  on("viewMyOrders", "click", () => go("my_orders.html"));
+  const session = read("ece_session", null);   // checkout: show the logged-in student
+    if (session) {
+      const saved = read("ece_users", []).find(u => u.email === session.email);
+      const isAlex = session.email === "alex.costa@edu.ece.fr";
+      set("studentName", session.name);
+      set("studentInfo", isAlex ? "Promo 2026 · ING4 Cybersecurity" : "Promo 2026");
+      const phone = (saved && saved.phone) || (isAlex ? "+33 6 89 52 02 69" : "");
+      set("studentPhone", phone ? "SMS: " + phone : "SMS: not provided");
+      set("studentEmail", "Email: " + session.email);
+    }
+  }
 setupEvents(); renderTray(); renderOrders();
 if ($("menuGroups")) initMenuPage();
 
@@ -149,4 +154,16 @@ async function initMenuPage() {
     renderMenu();
   });
   renderMenu();
+}
+
+if ($("confirmOrder")) initCheckoutPage();
+
+async function initCheckoutPage() {
+  const data = await loadData();
+  const first = cart[0];
+  if (data && first) {
+    const cafe = data.cafeterias.find(c => c.id === first.cafeteriaId);
+    if (cafe) { set("pickupName", cafe.name); set("pickupPlace", cafe.location); set("crumbCafe", cafe.name); }
+  }
+  set("payTotal", money(total()));
 }
