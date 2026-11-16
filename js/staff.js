@@ -195,6 +195,17 @@ function getMenu() {
 }
 function saveMenu(m) { try { localStorage.setItem(MKEY, JSON.stringify(m)); } catch (e) { /* ignoré */ } }
 
+const DISH_IMG = {
+  "Chicken Caesar Salad": "chicken-caesar-salad.jpg",
+  "Ham & Cheese Panini": "ham-cheese-panini.jpg",
+  "Chicken & Mozzarella Panini": "chicken-mozzarella-panini.jpg",
+  "Salmon Poke Bowl": "salmon-poke.jpg",
+  "Mediterranean Vegetarian Salad": "mediterranean-salad.jpg"
+};
+const dishImg = (name) => DISH_IMG[name]
+  ? `<img class="thumb" src="../images/dishes/${DISH_IMG[name]}" alt="" loading="lazy">`
+  : `<span class="thumb thumb--empty" aria-hidden="true"></span>`;
+
 function renderMenu() {
   const all = getMenu();
   const q = $("#mSearch").value.trim().toLowerCase();
@@ -203,7 +214,7 @@ function renderMenu() {
   $("#mOut").textContent = all.filter((d) => d.stock === 0).length;
   $("#menuBody").innerHTML = list.length ? list.map((d) => `
     <tr>
-      <td data-label="Item"><strong>${esc(d.name)}</strong><small>${esc(d.desc)}</small>${d.tag ? `<span class="tag">${esc(d.tag)}</span>` : ""}</td>
+      <td data-label="Item"><div class="item">${dishImg(d.name)}<div><strong>${esc(d.name)}</strong><small>${esc(d.desc)}</small>${d.tag ? `<span class="tag">${esc(d.tag)}</span>` : ""}</div></div></td>
       <td data-label="Price">${money(d.price)}</td>
       <td data-label="Stock"><div class="stepper"><button type="button" data-a="dec" data-id="${d.id}" aria-label="Decrease stock of ${esc(d.name)}">−</button><output>${d.stock}</output><button type="button" data-a="inc" data-id="${d.id}" aria-label="Increase stock of ${esc(d.name)}">+</button></div>
         ${d.stock === 0 ? '<span class="warn">⚠ Out of stock</span>' : d.stock <= CRITICAL ? '<span class="warn">⚠ Critical stock</span>' : ""}</td>
@@ -254,3 +265,18 @@ function initMenu() {
   renderMenu();
 }
 if (page === "menu") initMenu();
+
+/* ---------- Top bar icons (same inline-SVG method as common.js) ---------- */
+const TOP_ICONS = {
+  bell: '<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.2 2.2 0 002.1-1.6H9.9A2.2 2.2 0 0012 22zm6-6.5V11a6 6 0 00-4.6-5.8V4.5a1.4 1.4 0 10-2.8 0v.7A6 6 0 006 11v4.5l-2 2V19h16v-1.5l-2-2z"/><circle cx="18.5" cy="5.5" r="3"/></svg>',
+  user: '<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 4a3.5 3.5 0 110 7 3.5 3.5 0 010-7zm0 14a8 8 0 01-6-2.7c.1-2 4-3.1 6-3.1s5.9 1.1 6 3.1A8 8 0 0112 20z"/></svg>'
+};
+
+(function renderTopIcons() {
+  const box = document.querySelector(".top-icons");
+  if (!box) return;
+  const withBell = document.body.dataset.page !== "admin";   // the admin bar only has the profile
+  box.innerHTML =
+    (withBell ? `<button type="button" class="top-icon" aria-label="Notifications">${TOP_ICONS.bell}</button>` : "") +
+    `<button type="button" class="top-icon" aria-label="Profile">${TOP_ICONS.user}</button>`;
+})();

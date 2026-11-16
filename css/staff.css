@@ -157,3 +157,18 @@ dialog input, dialog select { display: block; width: 100%; margin-top: 4px; padd
 .icon-btn { display: inline-block; width: auto; height: auto; border-radius: 8px; color: inherit; }
 .card { border-width: 1.5px; border-color: var(--rust); border-radius: 14px; }
 .status { display: inline-flex; }
+
+.top-icons { display: flex; align-items: center; gap: 14px; margin-left: auto; }
+.topbar .top-icon {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; padding: 0;
+  border: 0; border-radius: 50%;
+  background: transparent; box-shadow: none;
+  color: var(--text); cursor: pointer;
+}
+.topbar .top-icon:hover { background: var(--peach-dark); }
+.topbar .top-icon svg { display: block; }
+
+.item { display: flex; align-items: center; gap: 14px; }
+.thumb { width: 64px; height: 64px; flex: none; border-radius: 12px; object-fit: cover; background: var(--sand); }
+@media (max-width: 760px) { .thumb { width: 48px; height: 48px; } }
