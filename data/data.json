@@ -1,0 +1,35 @@
+{
+  "cafeterias": [
+    { "id": 1, "name": "Le CROUS Express", "campus": "Eiffel 1", "location": "Building 2 • Level -1, near the FabLab",
+      "description": "Artisan sandwiches, freshly toasted paninis made to order, fresh mixed salads, and balanced poke bowls.",
+      "tags": ["Panini", "Poke bowls", "Salad"], "openUntil": "16:00", "open": true, "wait": 4, "crowd": "low", "rating": 4.6, "reviews": 185, "image": "images/cafeterias/crous-express.jpg" },
+    { "id": 2, "name": "Le Café Eiffel", "campus": "Eiffel 1", "location": "Building 1 • Level 2",
+      "description": "Freshly brewed coffee, sweet treats, and toasted paninis. Perfect for a quick break between classes.",
+      "tags": ["Drinks", "Panini", "Dessert"], "openUntil": "14:00", "open": true, "wait": 15, "crowd": "medium", "rating": 4.2, "reviews": 250, "image": "images/cafeterias/cafe-eiffel.jpg" },
+    { "id": 3, "name": "Le Comptoir Défense", "campus": "Cœur Défense", "location": "Tour Cœur Défense • Hall Principal Floor 2",
+      "description": "A tasty selection of wraps, juicy burgers, and comforting pasta dishes for a satisfying lunch on the go.",
+      "tags": ["Pasta", "Burger", "Wraps"], "openUntil": "16:00", "open": true, "wait": 30, "crowd": "high", "rating": 4.1, "reviews": 100, "image": "images/cafeterias/comptoir-defense.jpg" },
+    { "id": 4, "name": "Pasta Corner", "campus": "Eiffel 2", "location": "Building 2 • Level -1, near FabLab",
+      "description": "Delicious pasta bowls served with flavourful sauces, fresh ingredients, and traditional Italian-inspired toppings.",
+      "tags": ["Pasta", "Italian", "Vegetarian"], "openUntil": "16:00", "open": true, "wait": 4, "crowd": "low", "rating": 4.6, "reviews": 185, "image": "images/cafeterias/pasta-corner.jpg" },
+    { "id": 5, "name": "La Pause Gourmande", "campus": "Eiffel 1", "location": "Building 1 • Level 2",
+      "description": "Freshly prepared sandwiches, homemade salads, and refreshing drinks for a quick and balanced meal.",
+      "tags": ["Sandwich", "Salad", "Drinks"], "openUntil": "14:00", "open": true, "wait": 15, "crowd": "medium", "rating": 4.2, "reviews": 250, "image": "images/cafeterias/pause-gourmande.jpg" },
+    { "id": 6, "name": "Le Green Bowl", "campus": "Cœur Défense", "location": "Tour Cœur Défense • Hall Principal Floor 2",
+      "description": "Colourful poke bowls, crisp seasonal vegetables, and refreshing options for a fresh and balanced lunch.",
+      "tags": ["Healthy", "Fresh", "Pokebowls"], "openUntil": "18:00", "open": true, "wait": 30, "crowd": "high", "rating": 4.1, "reviews": 100, "image": "images/cafeterias/green-bowl.jpg" }
+  ],
+  "dishes": [
+    { "id": 1, "cafeteriaId": 1, "name": "Chicken Caesar Salad", "category": "Salads", "price": 6.5, "tags": ["Halal"], "image": "images/dishes/chicken-caesar-salad.jpg" },
+    { "id": 2, "cafeteriaId": 1, "name": "Ham & Cheese Panini", "category": "Paninis", "price": 4.5, "tags": [], "image": "images/dishes/ham-cheese-panini.jpg" },
+    { "id": 3, "cafeteriaId": 1, "name": "Mediterranean Vegetarian Salad", "category": "Salads", "price": 6.5, "tags": ["Vegetarian"], "image": "images/dishes/mediterranean-salad.jpg" },
+    { "id": 4, "cafeteriaId": 1, "name": "Chicken & Mozzarella Panini", "category": "Paninis", "price": 4.5, "tags": ["Halal"], "image": "images/dishes/chicken-mozzarella-panini.jpg" }
+  ],
+  "popularDishIds": [1, 2, 3],
+  "demoOrder": { "id": "ECE-2848", "cafeteriaId": 1, "time": "12h04", "items": "1× Ham & Cheese Panini + 1× Chicken Caesar Salad", "status": "cooking" },
+  "users": [
+    { "name": "Alex Costa", "email": "alex.costa@edu.ece.fr", "password": "student123", "role": "student" },
+    { "name": "Guillaume", "email": "guillaume@eceeats.fr", "password": "staff123", "role": "staff" },
+    { "name": "Admin", "email": "admin@eceeats.fr", "password": "admin123", "role": "admin" }
+  ]
+}

@@ -2,47 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ECE Eats campus food pre-ordering">
-  <title>ECE Eats | Welcome</title>
-  <link rel="stylesheet" href="css/student.css">
-  <script src="js/student.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Eats – Login</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/entry.css">
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="index.html">ECE EATS</a>
-    <nav class="main-nav" aria-label="Student navigation">
-      <a class="nav-link" href="menu.html">Menu</a>
-      <a class="nav-link" href="checkout.html">Checkout</a>
-      <a class="nav-link" href="myorders.html">My Orders</a>
-    </nav>
-    <div class="header-actions">
-      <button type="button" class="icon-button"id="trayShortcut" aria-label="Go to your tray">🛒 <span id="headerCartCount">0</span></button>
-      <a class="icon-button" href="register.html" aria-label="Student profile">👤</a>
-    </div>
-  </header>
+<body class="auth-page" data-page="login">
 
-  <main class="container">
-    <section class="narrow view">
-      <h1>Order your campus meal before you arrive</h1>
-      <p class="description">Choose your food at Le CROUS Express, pick a pickup time and collect it without waiting in line.</p>
-      <div class="cafeteria-badges">
-        <span class="pill peach">Open now</span>
-        <span class="pill peach">Campus Eiffel 2</span>
-        <span class="pill green">8 minute wait · Low crowd</span>
-      </div>
-      <div class="cafeteria-badges">
-        <a class="btn btn-dark" href="menu.html">See the menu</a>
-        <a class="btn btn-orange" href="register.html">Create student account</a>
+  <main class="auth">
+    <div class="auth__photo" role="img" aria-label="Table full of dishes"></div>
+
+    <section class="auth__panel">
+      <div class="auth-card">
+        <p class="auth-card__logo">ECE EATS</p>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <h1 class="auth-card__title">Login</h1>
+
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input class="input" type="email" id="login-email" placeholder="Email" autocomplete="email">
+            <p class="field__error" id="login-email-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input class="input" type="password" id="login-password" placeholder="Password" autocomplete="current-password">
+            <p class="field__error" id="login-password-error"></p>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block auth-card__submit">Let’s Eat</button>
+
+          <div class="auth-card__links">
+            <a href="#" id="forgot-link">Forgot Password?</a>
+            <a href="register.html">Create an account</a>
+          </div>
+        </form>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div><strong>ECE EATS</strong><p>Official ECE Paris Campus Dining Platform.<br>Quick student meal ordering and nutritional information tracking.</p></div>
-    <div><strong>Site Campus</strong><p>Campus Eiffel 1 — 10 Rue Sextius Michel, 75015<br>Campus Eiffel 2 — 37 Quai de Grenelle, 75015<br>Campus Cœur Défense — Tour A, 92400 Courbevoie</p></div>
-    <div><strong>Support &amp; Maintenance</strong><p>Catering &amp; Facilities Office<br>Building E, Office 104<br>Office Hours: 8:30 AM – 5:00 PM</p></div>
-  </footer>
-  <div class="copyright">© 2026 Ecole Centrale d'Electronique (ECE Paris). ECE Eats Campus Dining Platform.</div>
+  <script src="js/entry.js"></script>
 </body>
 </html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Eats – Cafeterias</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/entry.css">
+</head>
+<body data-page="cafeterias" data-nav="cafeterias" data-auth="student">
+
+  <header id="site-header"></header>
+
+  <main class="container cafes">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="home.html">Homepage</a> &gt; <span>Cafeterias</span>
+    </nav>
+
+    <h1 class="cafes__title">Campus Dining &amp; Cafeterias</h1>
+    <p class="cafes__intro">Dining options across the Eiffel 1, Eiffel 2, and Cœur Défense campuses. Order ahead to skip the queues.</p>
+
+    <div class="cafes__filters">
+      <div class="campus-filters" id="campus-filters">
+        <button class="filter-pill is-active" data-campus="all">All Campus</button>
+        <button class="filter-pill" data-campus="Eiffel 1">Eiffel 1</button>
+        <button class="filter-pill" data-campus="Eiffel 2">Eiffel 2</button>
+        <button class="filter-pill" data-campus="Cœur Défense">Cœur Défense</button>
+      </div>
+      <label class="search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <input type="search" id="cafe-search" placeholder="Search meal, building" aria-label="Search meal or building">
+      </label>
+    </div>
+
+    <div class="grid-3" id="cafe-grid"></div>
+    <p class="cafes__empty hidden" id="cafe-empty">No cafeteria matches your search. Try another campus or keyword.</p>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/entry.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Eats – Home</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/entry.css">
+</head>
+<body data-page="home" data-nav="home" data-auth="student">
+
+  <header id="site-header"></header>
+
+  <main class="container home">
+    <section class="welcome">
+      <h1>Welcome back <span id="user-name">Alex</span>,</h1>
+      <p>What are you craving for today ?</p>
+    </section>
+
+    <section class="order-card card" id="current-order" hidden>
+      <div class="order-card__head">
+        <h2>Your current order</h2>
+        <span id="order-meta" class="text-soft"></span>
+      </div>
+      <p class="order-card__cafe" id="order-cafe"></p>
+      <p class="order-card__items text-soft" id="order-items"></p>
+      <ol class="tracker" id="tracker">
+        <li data-step="confirmed"><span class="tracker__dot"></span>Confirmed</li>
+        <li data-step="cooking"><span class="tracker__dot"></span>Cooking</li>
+        <li data-step="ready"><span class="tracker__dot"></span>Ready</li>
+        <li data-step="collected"><span class="tracker__dot"></span>Collected</li>
+      </ol>
+    </section>
+
+    <div class="filter-row" id="categories">
+      <a class="filter-pill" href="cafeterias.html?q=Salad">Salad</a>
+      <a class="filter-pill" href="cafeterias.html?q=Sandwich">Sandwich</a>
+      <a class="filter-pill" href="cafeterias.html?q=Wrap">Wrap</a>
+      <a class="filter-pill" href="cafeterias.html?q=Vegan">Vegan</a>
+      <a class="filter-pill" href="cafeterias.html?q=Halal">Halal</a>
+    </div>
+
+    <section class="block">
+      <h2 class="block__title">Popular today</h2>
+      <div class="grid-3" id="popular"></div>
+    </section>
+
+    <section class="block">
+      <div class="block__head">
+        <h2 class="block__title">Nearby Cafeterias</h2>
+        <a class="link" href="cafeterias.html">See other cafeterias →</a>
+      </div>
+      <div class="grid-3" id="nearby"></div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/entry.js"></script>
+</body>
+</html>

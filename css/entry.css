@@ -1,0 +1,217 @@
+/* ==========================================================
+   ENTRY pages (owner: A): login, register, staff login,
+   home, cafeterias
+   ========================================================== */
+
+/* ---------- Auth pages (student login, register, staff login) ---------- */
+.auth-page { background: var(--cream); }
+
+.auth {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.auth__photo {
+  flex: 0 0 46%;
+  background:
+    url("../images/Share_food.jpg") center / cover no-repeat,
+    var(--sand);
+}
+
+/* Orange panel with the big curved left edge (check the radius in Figma) */
+.auth__panel {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  margin-left: -12%;
+  padding: var(--space-6) var(--space-6) var(--space-6) 12%;
+  background: var(--orange);
+  border-radius: 22% 0 0 22% / 50% 0 0 50%;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;               /* check card width in Figma */
+  padding: var(--space-6);
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+}
+
+.auth-card__logo {
+  text-align: center;
+  font-size: var(--fs-2xl);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.auth-card__title {
+  margin: var(--space-2) 0 var(--space-5);
+  text-align: center;
+  font-size: var(--fs-xl);
+  font-weight: 400;
+}
+
+/* Inputs in the mockup: beige fill, dark outline */
+.auth-card .input {
+  background: var(--sand);
+  border: 1px solid var(--brown);
+}
+.auth-card .input:focus { border-color: var(--orange); background: var(--white); }
+
+.auth-card__submit {
+  margin-top: var(--space-2);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.auth-card__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  font-size: var(--fs-sm);
+  font-style: italic;
+}
+.auth-card__links a:hover,
+.auth-card__staff a:hover { color: var(--orange-dark); text-decoration: underline; }
+
+.auth-card__staff {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--text-soft);
+}
+.auth-card__staff a { color: var(--orange-dark); font-weight: 500; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1024px) {
+  .auth__photo { flex-basis: 38%; }
+  .auth__panel { margin-left: -10%; padding-left: 10%; }
+}
+
+/* ---------- Mobile: photo becomes a banner, panel is full width ---------- */
+@media (max-width: 768px) {
+  .auth { flex-direction: column; }
+  .auth__photo { flex: 0 0 180px; }
+  .auth__panel {
+    margin-left: 0;
+    margin-top: -24px;
+    padding: var(--space-5) var(--space-4) var(--space-6);
+    border-radius: 24px 24px 0 0;
+    align-items: start;
+  }
+  .auth-card { padding: var(--space-5) var(--space-4); }
+  .auth-card__logo { font-size: var(--fs-xl); }
+}
+
+/* ---------- Staff login extras ---------- */
+.auth__photo--staff {
+  background:
+    url("../images/staff-bg.jpg") center / cover no-repeat,
+    var(--sand);
+}
+.auth-card__subtitle { margin-top: var(--space-2); text-align: center; font-size: var(--fs-md); font-weight: 500; }
+.auth-card__note { margin: var(--space-3) 0 var(--space-5); text-align: center; font-size: var(--fs-sm); color: var(--text-soft); }
+
+/* ==========================================================
+   HOME + CAFETERIAS (shared card styles)
+   ========================================================== */
+.home, .cafes { padding-top: var(--space-6); }
+.welcome h1 { font-size: var(--fs-xl); font-weight: 600; }
+.welcome p { margin-top: var(--space-1); font-size: var(--fs-lg); font-weight: 500; }
+
+/* Current order + tracker */
+.order-card { margin-top: var(--space-5); padding: var(--space-5); border-radius: var(--radius); }
+.order-card__head { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: baseline; }
+.order-card__head h2 { font-size: var(--fs-md); }
+.order-card__cafe { margin-top: var(--space-3); font-size: var(--fs-md); font-weight: 500; }
+.order-card__items { font-size: var(--fs-sm); }
+.tracker {
+  position: relative; display: grid; grid-template-columns: repeat(4, 1fr);
+  margin: var(--space-4) 0 0; padding: var(--space-4) var(--space-4) var(--space-3);
+  background: var(--sand); border-radius: var(--radius); list-style: none;
+  font-size: var(--fs-xs); text-align: center; color: var(--olive); font-weight: 500;
+}
+.tracker li { position: relative; z-index: 1; display: grid; gap: var(--space-2); justify-items: center; }
+.tracker__dot { width: 14px; height: 14px; border-radius: 50%; background: var(--white); border: 2px solid var(--orange-74); }
+.tracker li.is-done .tracker__dot { background: var(--orange-dark); border-color: var(--orange-dark); }
+.tracker li.is-current { color: var(--text); font-weight: 700; }
+.tracker li.is-current .tracker__dot { background: var(--orange-dark); border-color: var(--orange-dark); box-shadow: 0 0 0 4px var(--orange-44); }
+.tracker::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 23px; height: 6px; border-radius: 3px; background: var(--orange-44); }
+
+/* Sections */
+.filter-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-5) 0; }
+.block { margin-top: var(--space-5); padding: var(--space-5); background: var(--white); border-radius: var(--radius-lg); }
+.block__head { display: flex; justify-content: space-between; align-items: baseline; }
+.block__title { margin-bottom: var(--space-4); font-size: var(--fs-lg); }
+.link { font-size: var(--fs-sm); font-weight: 600; text-decoration: underline; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+
+/* Meal cards */
+.meal-card { display: flex; flex-direction: column; background: var(--peach); border-radius: var(--radius); overflow: hidden; }
+.meal-card__photo { aspect-ratio: 16 / 10; background: var(--sand) center / cover no-repeat; }
+.meal-card__body { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3) var(--space-4) var(--space-4); }
+.meal-card__name { font-size: var(--fs-sm); font-weight: 600; }
+.meal-card__foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.price { font-size: var(--fs-lg); font-weight: 700; }
+.add-btn { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--brown); color: var(--white); font-size: 1.1rem; line-height: 1; }
+
+/* Cafeteria cards */
+.cafe-card { display: flex; flex-direction: column; background: var(--peach); border-radius: var(--radius); overflow: hidden; }
+.cafe-card__photo { position: relative; aspect-ratio: 16 / 9; background: var(--sand) center / cover no-repeat; }
+.cafe-card__badges { position: absolute; inset: var(--space-3) var(--space-3) auto; display: flex; gap: var(--space-2); }
+.cafe-card__wait { position: absolute; right: var(--space-3); bottom: var(--space-3); }
+.badge-pill { padding: 2px 10px; border-radius: var(--radius-pill); background: var(--white); font-size: var(--fs-xs); font-weight: 500; }
+.cafe-card__body { display: flex; flex-direction: column; gap: var(--space-2); flex: 1; padding: var(--space-3) var(--space-4) var(--space-4); }
+.cafe-card__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); }
+.cafe-card__head h3 { font-size: var(--fs-md); }
+.rating { font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; }
+.rating::first-letter { color: var(--star); }
+.rating small { font-weight: 400; color: var(--text-soft); }
+.cafe-card__desc { font-size: var(--fs-sm); }
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.cafe-card__foot { display: flex; justify-content: space-between; align-items: end; gap: var(--space-3); margin-top: auto; padding-top: var(--space-2); }
+.cafe-card__foot small { display: block; font-size: var(--fs-xs); font-weight: 600; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .block { padding: var(--space-4); }
+  .tracker { padding-inline: var(--space-2); font-size: 11px; }
+}
+
+/* ---------- Cafeterias page ---------- */
+.breadcrumb { font-size: var(--fs-xs); color: var(--text-soft); }
+.breadcrumb a { color: var(--orange-dark); text-decoration: underline; }
+.cafes__title { margin-top: var(--space-4); font-size: var(--fs-xl); font-weight: 500; }
+.cafes__intro { margin-top: var(--space-2); font-size: var(--fs-sm); }
+
+.cafes__filters {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4);
+  margin: var(--space-5) 0;
+}
+.campus-filters { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.search-bar {
+  display: flex; align-items: center; gap: var(--space-2);
+  flex: 1; min-width: 220px; max-width: 360px; margin-left: auto;
+  padding: 7px 16px; background: var(--sand); border-radius: var(--radius-pill);
+}
+.search-bar input { flex: 1; border: 0; outline: none; background: transparent; font-size: var(--fs-sm); }
+.search-bar:focus-within { box-shadow: 0 0 0 2px var(--orange); }
+.cafes__empty { padding: var(--space-6) 0; text-align: center; color: var(--text-soft); }
+
+/* Closed cafeteria */
+.cafe-card.is-closed .cafe-card__photo { filter: grayscale(1); }
+.cafe-card.is-closed .btn { background: var(--sand); color: var(--text-soft); pointer-events: none; }
+
+@media (max-width: 768px) {
+  .search-bar { max-width: none; margin-left: 0; flex-basis: 100%; }
+  .campus-filters { overflow-x: auto; flex-wrap: nowrap; padding-bottom: var(--space-1); }
+  .campus-filters .filter-pill { white-space: nowrap; }
+}
