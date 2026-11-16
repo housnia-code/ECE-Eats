@@ -85,7 +85,10 @@ function renderOrders() {
   const all = getOrders();
   const filter = document.body.dataset.filter || "All";
   const q = $("#search").value.trim().toLowerCase().replace("#", "");
-  const list = all.filter((o) => (filter === "All" || o.status === filter) && o.id.toLowerCase().includes(q)).sort(byPickup);
+  const matches = (o) => !q || [o.id, o.student, o.track, o.status, o.pickupTime, ...o.items.map((i) => i.name)]
+    .join(" ").toLowerCase().includes(q);
+  const list = all.filter((o) => (filter === "All" || o.status === filter) && matches(o)).sort(byPickup);
+  
 
   $("#cQueue").textContent = all.filter((o) => o.status === "Confirmed").length;
   $("#cKitchen").textContent = all.filter((o) => o.status === "Cooking").length;
