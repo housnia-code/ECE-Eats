@@ -52,7 +52,7 @@ function renderNav() {
     <nav class="navbar__links" id="nav-links">
       ${link("home", "Home", "main/home.html")}
       ${link("cafeterias", "Cafeterias", "main/cafeterias.html")}
-      ${link("orders", "My Orders", "student/my-orders.html")}
+      ${link("orders", "My Orders", "student/my_orders.html")}
     </nav>
     <div class="navbar__actions">
       <form class="search-pill" id="nav-search" role="search">

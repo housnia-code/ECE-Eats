@@ -123,23 +123,22 @@
 .welcome p { margin-top: var(--space-1); font-size: var(--fs-lg); font-weight: 500; }
 
 /* Current order + tracker */
-.order-card { margin-top: var(--space-5); padding: var(--space-5); border-radius: var(--radius); }
-.order-card__head { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: baseline; }
-.order-card__head h2 { font-size: var(--fs-md); }
-.order-card__cafe { margin-top: var(--space-3); font-size: var(--fs-md); font-weight: 500; }
-.order-card__items { font-size: var(--fs-sm); }
-.tracker {
-  position: relative; display: grid; grid-template-columns: repeat(4, 1fr);
-  margin: var(--space-4) 0 0; padding: var(--space-4) var(--space-4) var(--space-3);
-  background: var(--sand); border-radius: var(--radius); list-style: none;
-  font-size: var(--fs-xs); text-align: center; color: var(--olive); font-weight: 500;
-}
-.tracker li { position: relative; z-index: 1; display: grid; gap: var(--space-2); justify-items: center; }
-.tracker__dot { width: 14px; height: 14px; border-radius: 50%; background: var(--white); border: 2px solid var(--orange-74); }
-.tracker li.is-done .tracker__dot { background: var(--orange-dark); border-color: var(--orange-dark); }
-.tracker li.is-current { color: var(--text); font-weight: 700; }
-.tracker li.is-current .tracker__dot { background: var(--orange-dark); border-color: var(--orange-dark); box-shadow: 0 0 0 4px var(--orange-44); }
-.tracker::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 23px; height: 6px; border-radius: 3px; background: var(--orange-44); }
+/* Current order card (Home) */
+.order-card { margin-top: var(--space-5); padding: var(--space-5); background: var(--white); border-radius: var(--radius); }
+.order-card__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-5); }
+.order-card__head h2 { font-size: var(--fs-md); font-weight: 600; }
+.order-card__total { margin-left: auto; font-size: var(--fs-lg); font-weight: 600; }
+.order-card__cafe { margin-top: var(--space-3); font-size: var(--fs-lg); font-weight: 500; }
+.order-card__items { font-size: var(--fs-sm); color: var(--text-soft); }
+
+.tracker { margin-top: var(--space-4); padding: var(--space-4) var(--space-5) var(--space-3); background: var(--sand); border-radius: var(--radius); }
+.tracker__icons, .tracker__labels { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+.tracker__icons span { display: grid; place-items: center; color: var(--text); }
+.tracker__labels span { font-size: var(--fs-sm); font-weight: 500; color: var(--text); }
+.tracker .is-done, .tracker .is-current { color: var(--olive); }
+.tracker__labels .is-current { font-weight: 700; }
+.tracker__bar { height: 22px; margin: var(--space-2) 0; border-radius: var(--radius-pill); background: var(--orange-44); overflow: hidden; }
+.tracker__bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--orange-dark); transition: width 0.4s; }
 
 /* Sections */
 .filter-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-5) 0; }
@@ -152,9 +151,11 @@
 /* Meal cards */
 .meal-card { display: flex; flex-direction: column; background: var(--peach); border-radius: var(--radius); overflow: hidden; }
 .meal-card__photo { aspect-ratio: 16 / 10; background: var(--sand) center / cover no-repeat; }
-.meal-card__body { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3) var(--space-4) var(--space-4); }
+.meal-card__body { display: flex; flex-direction: column; flex: 1; gap: var(--space-2); padding: var(--space-3) var(--space-4) var(--space-4); }
+.meal-card__tags { min-height: 26px; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.meal-card__tags .chip { align-self: flex-start; }
+.meal-card__foot { margin-top: auto; }
 .meal-card__name { font-size: var(--fs-sm); font-weight: 600; }
-.meal-card__foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
 .price { font-size: var(--fs-lg); font-weight: 700; }
 .add-btn { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--brown); color: var(--white); font-size: 1.1rem; line-height: 1; }
 

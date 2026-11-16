@@ -114,7 +114,7 @@ function renderMealCard(d, cafes) {
       <div class="meal-card__photo" ${imgStyle(d.image)}></div>
       <div class="meal-card__body">
         <h3 class="meal-card__name">${d.name} - ${cafe.name}</h3>
-        ${d.tags.map((t) => `<span class="chip">${t}</span>`).join("")}
+        <div class="meal-card__tags">${d.tags.map((t) => `<span class="chip">${t}</span>`).join("")}</div>
         <div class="meal-card__foot">
           <span class="price">${formatPrice(d.price)}</span>
           <a class="add-btn" href="${BASE}student/menu.html?cafe=${d.cafeteriaId}" aria-label="Add ${d.name}">+</a>
@@ -149,28 +149,43 @@ function renderCafeCard(c, withBadges) {
 
 async function initHome() {
   const data = await loadData();
+  if (!data) { showDataError("popular", "nearby"); return; }
+
   const session = getSession();
   if (session) document.getElementById("user-name").textContent = session.name.split(" ")[0];
 
-  // Current order: latest active order saved by B, else the demo order
-  const orders = getJSON("ece_orders", []);
-  const active = [...orders].reverse().find((o) => o.status !== "collected");
-  const demo = data.demoOrder;
-  const order = active
-    ? { id: active.id, cafeteriaId: active.cafeteriaId, time: active.time || "", items: active.itemsText || "", status: active.status }
-    : demo;
+  // Current order: only this user's orders. The demo order is shown for the demo student only.
+  const email = session?.email;
+  const myOrders = getJSON("ece_orders", []).filter((o) => o.userEmail === email);
+  const active = [...myOrders].reverse().find((o) => String(o.status).toLowerCase() !== "collected");
+  const isDemoUser = email === "alex.costa@edu.ece.fr";
+  const o = active
+    ? { id: active.id, cafeteriaId: active.cafeteriaId, time: active.time || "", items: active.itemsText || "",
+        status: active.status, total: active.total, place: active.place || "" }
+    : (isDemoUser ? data.demoOrder : null);
 
-  const cafe = data.cafeterias.find((c) => c.id === order.cafeteriaId);
-  document.getElementById("order-meta").textContent = `#${order.id} · ordered at ${order.time}`;
-  document.getElementById("order-cafe").textContent = cafe.name;
-  document.getElementById("order-items").textContent = order.items;
-  const steps = ["confirmed", "cooking", "ready", "collected"];
-  const current = steps.indexOf(order.status);
-  document.querySelectorAll("#tracker li").forEach((li, i) => {
-    li.classList.toggle("is-done", i < current);
-    li.classList.toggle("is-current", i === current);
-  });
-  document.getElementById("current-order").hidden = false;
+  const card = document.getElementById("current-order");
+  if (o) {
+    const cafe = data.cafeterias.find((c) => c.id === o.cafeteriaId);
+    const status = String(o.status).toLowerCase();
+    document.getElementById("order-meta").textContent = `#${o.id} · ordered at ${o.time}`;
+    document.getElementById("order-cafe").textContent = cafe.name + (o.place ? " - " + o.place : "");
+    document.getElementById("order-items").textContent = o.items;
+    document.getElementById("order-total").textContent = o.total != null ? formatPrice(Number(o.total)) : "";
+
+    const steps = ["confirmed", "cooking", "ready", "collected"];
+    const fills = [12.5, 37.5, 62.5, 100];
+    const current = steps.indexOf(status);
+    document.querySelectorAll("#tracker [data-step]").forEach((el) => {
+      const i = steps.indexOf(el.dataset.step);
+      el.classList.toggle("is-done", i < current);
+      el.classList.toggle("is-current", i === current);
+    });
+    document.getElementById("tracker-fill").style.width = (fills[current] ?? 0) + "%";
+    card.hidden = false;
+  } else {
+    card.hidden = true;
+  }
 
   document.getElementById("popular").innerHTML =
     data.popularDishIds.map((id) => renderMealCard(data.dishes.find((d) => d.id === id), data.cafeterias)).join("");

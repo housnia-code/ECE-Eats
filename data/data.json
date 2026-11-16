@@ -26,7 +26,7 @@
     { "id": 4, "cafeteriaId": 1, "name": "Chicken & Mozzarella Panini", "category": "Paninis", "price": 4.5, "tags": ["Halal"], "image": "images/dishes/chicken-mozzarella-panini.jpg" }
   ],
   "popularDishIds": [1, 2, 3],
-  "demoOrder": { "id": "ECE-2848", "cafeteriaId": 1, "time": "12h04", "items": "1× Ham & Cheese Panini + 1× Chicken Caesar Salad", "status": "cooking" },
+  "demoOrder": { "id": "ece-2848", "cafeteriaId": 1, "place": "Building 2 level -1", "time": "12h04", "items": "1× Ham & Cheese panini + 1× Chicken Caesar Salad + 1× Eau Cristaline", "total": 11, "status": "ready" },
   "users": [
     { "name": "Alex Costa", "email": "alex.costa@edu.ece.fr", "password": "student123", "role": "student" },
     { "name": "Guillaume", "email": "guillaume@eceeats.fr", "password": "staff123", "role": "staff" },
