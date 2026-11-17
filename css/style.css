@@ -287,3 +287,19 @@ button { cursor: pointer; }
 .user-menu__name { font-size: var(--fs-sm); font-weight: 600; margin-bottom: var(--space-2); }
 .user-menu button { width: 100%; padding: 8px; border: 0; border-radius: var(--radius-sm); background: var(--sand); font-size: var(--fs-sm); }
 .user-menu button:hover { background: var(--orange-20); }
+
+/* Current order card + tracker (Home and My Orders) */
+.order-card { margin-top: var(--space-5); padding: var(--space-5); background: var(--white); border-radius: var(--radius); }
+.order-card__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-5); }
+.order-card__head h2 { font-size: var(--fs-md); font-weight: 600; }
+.order-card__total { margin-left: auto; font-size: var(--fs-lg); font-weight: 600; }
+.order-card__cafe { margin-top: var(--space-3); font-size: var(--fs-lg); font-weight: 500; }
+.order-card__items { font-size: var(--fs-sm); color: var(--text-soft); }
+.tracker { margin-top: var(--space-4); padding: var(--space-4) var(--space-5) var(--space-3); background: var(--sand); border-radius: var(--radius); }
+.tracker__icons, .tracker__labels { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+.tracker__icons span { display: grid; place-items: center; color: var(--text); }
+.tracker__labels span { font-size: var(--fs-sm); font-weight: 500; color: var(--text); }
+.tracker .is-done, .tracker .is-current { color: var(--olive); }
+.tracker__labels .is-current { font-weight: 700; }
+.tracker__bar { height: 22px; margin: var(--space-2) 0; border-radius: var(--radius-pill); background: var(--orange-44); overflow: hidden; }
+.tracker__bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--orange-dark); transition: width 0.4s; }

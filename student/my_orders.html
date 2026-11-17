@@ -5,25 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ECE Eats campus food pre-ordering">
   <title>ECE Eats | My Orders</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/student.css">
-  <script src="../js/student.js" defer></script>
+  <link rel="stylesheet" href="../css/style.css?v=3">
+  <link rel="stylesheet" href="../css/student.css?v=3">
 </head>
-<body>
+<body data-page="my-orders" data-nav="orders" data-auth="student">
   <header id="site-header"></header>
-  <header class="topbar">
-    <a class="brand" href="index.html">ECE EATS</a>
-    <nav class="main-nav" aria-label="Student navigation">
-      <a class="nav-link" href="menu.html">Menu</a>
-      <a class="nav-link" href="checkout.html">Checkout</a>
-      <a class="nav-link active" href="myorders.html">My Orders</a>
-    </nav>
-    <div class="header-actions">
-      <button type="button" class="icon-button"id="trayShortcut" aria-label="Go to your tray">🛒 <span id="headerCartCount">0</span></button>
-      <a class="icon-button" href="register.html" aria-label="Student profile">👤</a>
-    </div>
-  </header>
 
   <main class="container">
     <section class="view">
@@ -35,12 +21,9 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div><strong>ECE EATS</strong><p>Official ECE Paris Campus Dining Platform.<br>Quick student meal ordering and nutritional information tracking.</p></div>
-    <div><strong>Site Campus</strong><p>Campus Eiffel 1 — 10 Rue Sextius Michel, 75015<br>Campus Eiffel 2 — 37 Quai de Grenelle, 75015<br>Campus Cœur Défense — Tour A, 92400 Courbevoie</p></div>
-    <div><strong>Support &amp; Maintenance</strong><p>Catering &amp; Facilities Office<br>Building E, Office 104<br>Office Hours: 8:30 AM – 5:00 PM</p></div>
-  </footer>
-  <div class="copyright">© 2026 Ecole Centrale d'Electronique (ECE Paris). ECE Eats Campus Dining Platform.</div>
+  <footer id="site-footer"></footer>
+
+  <script src="../js/common.js?v=3"></script>
+  <script src="../js/student.js?v=3"></script>
 </body>
-<script src="../js/common.js"></script>
 </html>

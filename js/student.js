@@ -9,7 +9,7 @@ const on = (id, type, fn) => $(id)?.addEventListener(type, fn), go = page => { l
 let cart = read(STORAGE_CART, []), orders = read(STORAGE_ORDERS, []), selectedCategory = "All", selectedTime = "ASAP", selectedPayment = "card", toastTimer;
 // 2. HELPERS
 const money = value => formatPrice(Number(value));
-const save = () => { localStorage.setItem(STORAGE_CART, JSON.stringify(cart)); localStorage.setItem(STORAGE_ORDERS, JSON.stringify(orders)); if (typeof updateCartBadge === "function") updateCartBadge(); };
+const save = () => { localStorage.setItem(STORAGE_CART, JSON.stringify(cart)); if (typeof updateCartBadge === "function") updateCartBadge(); };
 const total = () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), count = () => cart.reduce((sum, item) => sum + item.quantity, 0);
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const itemsText = items => items.map(item => `${item.quantity}x ${escapeHtml(item.name)}`).join(" + ");
@@ -66,27 +66,67 @@ function renderTray() { // fills the tray on menu.html and checkout.html, and th
   set("headerCartCount", count()); if ($("goCheckout")) $("goCheckout").disabled = !cart.length;
   renderMenu();
 }
-// 5. ORDERS (current order with progress + previous orders)
-function renderProgress(status) {
-  const steps = ["Confirmed", "Cooking", "Ready", "Collected"], active = Math.max(0, steps.indexOf(status));
-  return `<div class="progress-track">${steps.map((step, i) => `<div class="progress-step ${i <= active ? "done" : ""} ${i === active ? "active" : ""}"><div class="dot">${i < active ? "✓" : i + 1}</div>${step}</div>`).join("")}</div>`;
+
+// 5. ORDERS (same format as the staff pages: localStorage key "ece_orders")
+const ORDERS_KEY = "ece_orders";
+let allCafes = [];
+const hm = d => String(d.getHours()).padStart(2, "0") + "h" + String(d.getMinutes()).padStart(2, "0");
+
+async function renderOrders() {
+  if (!$("currentOrder")) return; // only on my_orders.html
+  const data = await loadData();
+  const cafes = data ? data.cafeterias : [];
+  const email = (read("ece_session", null) || {}).email;
+  const isDemo = email === "alex.costa@edu.ece.fr";
+  const mine = read(ORDERS_KEY, []).filter(o => o.userEmail === email);
+
+  const current = [...mine].reverse().find(o => String(o.status).toLowerCase() !== "collected") || (isDemo && data ? data.demoOrder : null);
+  const past = mine.filter(o => String(o.status).toLowerCase() === "collected").reverse().concat(isDemo && data ? (data.demoPastOrders || []) : []);
+
+  if (current) {
+    const v = orderView(current, cafes);
+    $("currentOrder").innerHTML = `<article class="order-card">
+      <div class="order-card__head"><h2>Your current order</h2><span>#${escapeHtml(v.id)} · ordered at ${escapeHtml(v.time)}</span><span class="order-card__total">${formatPrice(v.total)}</span></div>
+      <p class="order-card__cafe">${escapeHtml(v.cafeteria)}${v.place ? " - " + escapeHtml(v.place) : ""}</p>
+      <p class="order-card__items">${escapeHtml(v.items)}</p>
+      ${v.pickup ? `<p class="order-card__items">Pickup: ${escapeHtml(v.pickup)}</p>` : ""}
+      ${trackerHTML(v.status)}</article>`;
+  } else {
+    $("currentOrder").innerHTML = '<p class="empty-state">You have no current orders.</p>';
+  }
+
+  $("previousOrders").innerHTML = past.length ? past.map(o => {
+    const v = orderView(o, cafes), img = o.image || (o.items && o.items[0] && o.items[0].image);
+    return `<article class="previous-order">
+      ${img ? `<img src="${BASE}${img}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` : '<div class="previous-order-photo"></div>'}
+      <div class="previous-order-info"><h3>${escapeHtml(v.cafeteria)} <span class="status-text">✓ Collected</span></h3>
+        <p>${escapeHtml(v.items)}</p><small>${escapeHtml(v.place)}</small>
+        <small>#${escapeHtml(v.id)} · ordered at ${escapeHtml(v.time)}${o.date ? ", " + escapeHtml(o.date) : ""}${o.collectedAt ? ", Collected at " + escapeHtml(o.collectedAt) : ""}</small></div>
+      <div class="previous-order-price">${formatPrice(v.total)}</div></article>`;
+  }).join("") : '<p class="empty-state">Your previous orders will appear here.</p>';
 }
-function renderOrders() {
-  if (!$("currentOrder")) return; // only on myorders.html
-  const current = orders.find(order => order.status !== "Collected"), previous = orders.filter(order => order.status === "Collected");
-  $("currentOrder").innerHTML = current ? `<article class="order-card"><div class="order-card-top"><strong>Your current order　#${current.number} · ordered at ${current.orderedAt}</strong><strong>${money(current.total)}</strong></div>
-    <p class="order-items-text">${escapeHtml(current.cafeteria)} · ${itemsText(current.items)}</p><p class="order-items-text">Pickup: ${escapeHtml(current.pickup)}</p>${renderProgress(current.status)}</article>` : '<p class="empty-state">You have no current orders.</p>';
-  $("previousOrders").innerHTML = previous.length ? previous.map(order => `<article class="previous-order"><img src="${order.items[0]?.image || "images/dishes.png"}" alt="Order food">
-    <div class="previous-order-info"><strong>Le CROUS Express　<span class="status-text">● Collected</span></strong><p>${itemsText(order.items)}</p><small>#ece-${order.number} · ${escapeHtml(order.dateLabel)}</small></div>
-    <div class="previous-order-price">${money(order.total)}</div></article>`).join("") : '<p class="empty-state">Your previous orders will appear here.</p>';
-}
+
 function createOrder() {
-  const order = {number:String(Date.now()).slice(-6), items:cart.map(item => ({...item})), total:total(), pickup:selectedTime, payment:selectedPayment, status:"Confirmed",
-    orderedAt:new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"}), dateLabel:new Date().toLocaleDateString(), cafeteria:"Le CROUS Express"};
-  orders.unshift(order); cart = []; save(); renderTray();
-  $("confirmationDetails").innerHTML = `<strong>Order #${order.number}</strong><br>Le CROUS Express<br>Pickup time: ${escapeHtml(order.pickup)}<br>Total: ${money(order.total)}<br>Payment: ${PAYMENT_LABELS[order.payment]}`;
+  const session = read("ece_session", null) || {};
+  const first = cart[0], cafe = allCafes.find(c => c.id === first.cafeteriaId), now = new Date();
+  const list = read(ORDERS_KEY, []);
+  const next = Math.max(2849, ...list.map(o => parseInt(String(o.id).replace(/\D/g, ""), 10) || 0)) + 1;
+  const pickup = selectedTime === "ASAP" ? hm(new Date(now.getTime() + ((cafe && cafe.wait) || 10) * 60000)) : selectedTime.replace(":", "h");
+  const order = {
+    id: "ECE-" + next, userEmail: session.email || "", student: session.name || "Student",
+    track: session.email === "alex.costa@edu.ece.fr" ? "ING4 cybersecurity" : "ECE Paris",
+    cafeteriaId: first.cafeteriaId, cafeteria: cafe ? cafe.name : "Le CROUS Express", place: cafe ? cafe.location : "",
+    items: cart.map(i => ({ name: i.name, qty: i.quantity, price: i.price, image: i.image })),
+    total: total(), orderedAt: hm(now), date: now.toLocaleDateString("en-GB"),
+    pickupTime: pickup, payment: selectedPayment, status: "Confirmed", collectedAt: null
+  };
+  list.push(order);
+  localStorage.setItem(ORDERS_KEY, JSON.stringify(list));
+  cart = []; save(); renderTray();
+  $("confirmationDetails").innerHTML = `<strong>Order #${order.id}</strong><br>${escapeHtml(order.cafeteria)}<br>Pickup time: ${escapeHtml(order.pickupTime)}<br>Total: ${money(order.total)}<br>Payment: ${PAYMENT_LABELS[order.payment]}`;
   $("confirmationDialog").showModal();
 }
+window.addEventListener("storage", e => { if (e.key === ORDERS_KEY) renderOrders(); });  // staff changes a status in another tab
 // 6. EVENTS
 function pick(selector, activeClass, onPick) { // one-choice-at-a-time buttons
   $$(selector).forEach(el => el.addEventListener("click", () => { onPick(el); $$(selector).forEach(b => b.classList.toggle(activeClass, b === el)); }));
@@ -160,6 +200,7 @@ if ($("confirmOrder")) initCheckoutPage();
 
 async function initCheckoutPage() {
   const data = await loadData();
+  allCafes = data ? data.cafeterias : [];
   const first = cart[0];
   if (data && first) {
     const cafe = data.cafeterias.find(c => c.id === first.cafeteriaId);

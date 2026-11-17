@@ -58,5 +58,14 @@
     { "name": "Alex Costa", "email": "alex.costa@edu.ece.fr", "password": "student123", "role": "student" },
     { "name": "Guillaume", "email": "guillaume@eceeats.fr", "password": "staff123", "role": "staff" },
     { "name": "Admin", "email": "admin@eceeats.fr", "password": "admin123", "role": "admin" }
-  ]
+  ],
+  "demoPastOrders": [
+  { "id": "ECE-1298", "cafeteriaId": 1, "place": "Building 2 • Level -1 near FabLab", "date": "17/09/2026", "orderedAt": "12h04", "collectedAt": "12h30", "status": "Collected",
+    "items": [{ "name": "Salmon Poke bowl", "qty": 1, "price": 6 }, { "name": "Cristaline water", "qty": 1, "price": 1.5 }], "total": 7.5, "image": "images/dishes/salmon-poke.jpg" },
+  { "id": "ECE-1297", "cafeteriaId": 1, "place": "Building 2 • Level -1 near FabLab", "date": "17/09/2026", "orderedAt": "12h04", "collectedAt": "12h30", "status": "Collected",
+    "items": [{ "name": "Mediterranean Vegetarian Salad", "qty": 1, "price": 4 }, { "name": "Cristaline water", "qty": 1, "price": 1.5 }], "total": 5.5, "image": "images/dishes/mediterranean-salad.jpg" },
+  { "id": "ECE-1296", "cafeteriaId": 1, "place": "Building 2 • Level -1 near FabLab", "date": "17/09/2026", "orderedAt": "12h04", "collectedAt": "12h30", "status": "Collected",
+    "items": [{ "name": "Chicken & Mozzarella Panini", "qty": 1, "price": 4 }, { "name": "Cristaline water", "qty": 1, "price": 1.5 }], "total": 5.5, "image": "images/dishes/chicken-mozzarella-panini.jpg" }
+]
 }
+

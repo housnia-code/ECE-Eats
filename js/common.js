@@ -116,4 +116,34 @@ function updateCartBadge() {
   badge.textContent = n;
 }
 
+/* ---------- Orders: shared helpers (format = the staff pages' format) ---------- */
+function orderView(o, cafes) {
+  const cafe = (cafes || []).find((c) => c.id === o.cafeteriaId);
+  const items = Array.isArray(o.items) ? o.items.map((i) => `${i.qty}× ${i.name}`).join(" + ") : (o.items || "");
+  const total = o.total != null ? Number(o.total)
+    : (Array.isArray(o.items) ? o.items.reduce((s, i) => s + i.qty * i.price, 0) : 0);
+  return { id: o.id, cafeteria: o.cafeteria || (cafe && cafe.name) || "", place: o.place || "",
+           time: o.orderedAt || o.time || "", pickup: o.pickupTime || "", items, total,
+           status: String(o.status || "confirmed").toLowerCase() };
+}
+
+const TRACK_ICONS = [
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v3a6 6 0 01-6 6h-4a6 6 0 01-6-6v-3z"/><path d="M2 11h20M9 3.5c0 1.5 1 1.5 1 3M14 3.5c0 1.5 1 1.5 1 3"/></svg>',
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>',
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+];
+function trackerHTML(status) {
+  const steps = ["confirmed", "cooking", "ready", "collected"];
+  const labels = ["Confirmed", "Cooking", "Ready", "Collected"];
+  const fills = [12.5, 37.5, 62.5, 100];
+  const current = Math.max(0, steps.indexOf(String(status).toLowerCase()));
+  const cls = (i) => (i < current ? "is-done" : i === current ? "is-current" : "");
+  return `<div class="tracker">
+    <div class="tracker__icons">${TRACK_ICONS.map((ic, i) => `<span class="${cls(i)}">${ic}</span>`).join("")}</div>
+    <div class="tracker__bar"><span style="width:${fills[current]}%"></span></div>
+    <div class="tracker__labels">${labels.map((l, i) => `<span class="${cls(i)}">${l}</span>`).join("")}</div>
+  </div>`;
+}
+
 document.addEventListener("DOMContentLoaded", () => { requireLogin(); renderNav(); renderFooter(); });

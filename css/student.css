@@ -90,21 +90,18 @@ h1 { margin: 12px 0 5px; font-size: clamp(26px, 3vw, 36px); letter-spacing: -.8p
 .payment-option span { display: grid; gap: 4px; font-size: 13px; }  .payment-option small { color: var(--muted); }
 .confirm-order { margin-top: 5px; }  .back-to-menu { margin: 8px 0; }
 
+
 /* 7. MY ORDERS PAGE */
 .section-label { display: table; margin: 22px 0 15px; padding-bottom: 7px; border-bottom: 1px solid var(--line); font-size: 17px; }
-.order-card { margin-bottom: 16px; border-radius: 13px; padding: 18px; background: white; box-shadow: 0 2px 12px #56301a0a; }
-.order-card-top { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
-.order-items-text { margin: 10px 0; color: var(--muted); font-size: 13px; }
-.progress-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-top: 16px; border-radius: 12px; padding: 13px 8px; background: #eee6d9; }
-.progress-step { color: #897d72; font-size: 11px; text-align: center; }
-.progress-step .dot { display: grid; place-items: center; width: 20px; height: 20px; margin: 0 auto 6px; border-radius: 50%; background: #d4c8b8; color: white; }
-.progress-step.done, .progress-step.active { color: var(--brown); font-weight: 700; }
-.progress-step.done .dot, .progress-step.active .dot { background: var(--orange-dark); }
 .previous-orders { display: grid; gap: 13px; }
-.previous-order { display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 16px; overflow: hidden; border: 1.5px solid var(--orange-dark); border-radius: 12px; background: white; }
-.previous-order img { width: 110px; height: 105px; object-fit: cover; }
-.previous-order-info { padding: 10px 0; font-size: 13px; }  .previous-order-info p { margin: 7px 0; color: var(--muted); }
-.previous-order-price { padding: 12px; font-weight: 700; }
+.previous-order { display: grid; grid-template-columns: 130px 1fr auto; align-items: stretch; gap: 20px; overflow: hidden; border: 1.5px solid var(--orange-dark); border-radius: 12px; background: #fff; }
+.previous-order img, .previous-order-photo { width: 130px; height: 100%; min-height: 110px; object-fit: cover; background: var(--sand); }
+.previous-order-info { padding: 14px 0; font-size: 13px; }
+.previous-order-info h3 { margin: 0 0 8px; font-size: 15px; }
+.previous-order-info p { margin: 6px 0; }
+.previous-order-info small { display: block; margin-top: 4px; color: var(--text-soft); font-size: 11px; }
+.status-text { margin-left: 8px; color: var(--olive); font-weight: 700; }
+.previous-order-price { padding: 14px 24px; font-size: 16px; font-weight: 700; }
 
 
 

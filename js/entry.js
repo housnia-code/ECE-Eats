@@ -152,36 +152,30 @@ async function initHome() {
   if (!data) { showDataError("popular", "nearby"); return; }
 
   const session = getSession();
-  if (session) document.getElementById("user-name").textContent = session.name.split(" ")[0];
+  if (session) document.getElementById("user-name").textContent = session.firstName || session.name.split(" ")[0];
 
-  // Current order: only this user's orders. The demo order is shown for the demo student only.
-  const email = session?.email;
-  const myOrders = getJSON("ece_orders", []).filter((o) => o.userEmail === email);
-  const active = [...myOrders].reverse().find((o) => String(o.status).toLowerCase() !== "collected");
-  const isDemoUser = email === "alex.costa@edu.ece.fr";
-  const o = active
-    ? { id: active.id, cafeteriaId: active.cafeteriaId, time: active.time || "", items: active.itemsText || "",
-        status: active.status, total: active.total, place: active.place || "" }
-    : (isDemoUser ? data.demoOrder : null);
+  const email = session && session.email;
+  const mine = getJSON("ece_orders", []).filter((o) => o.userEmail === email);
+  const active = [...mine].reverse().find((o) => String(o.status).toLowerCase() !== "collected");
+  const raw = active || (email === "alex.costa@edu.ece.fr" ? data.demoOrder : null);
 
   const card = document.getElementById("current-order");
-  if (o) {
-    const cafe = data.cafeterias.find((c) => c.id === o.cafeteriaId);
-    const status = String(o.status).toLowerCase();
-    document.getElementById("order-meta").textContent = `#${o.id} · ordered at ${o.time}`;
-    document.getElementById("order-cafe").textContent = cafe.name + (o.place ? " - " + o.place : "");
-    document.getElementById("order-items").textContent = o.items;
-    document.getElementById("order-total").textContent = o.total != null ? formatPrice(Number(o.total)) : "";
+  if (raw) {
+    const v = orderView(raw, data.cafeterias);
+    document.getElementById("order-meta").textContent = `#${v.id} · ordered at ${v.time}`;
+    document.getElementById("order-cafe").textContent = v.cafeteria + (v.place ? " - " + v.place : "");
+    document.getElementById("order-items").textContent = v.items;
+    document.getElementById("order-total").textContent = formatPrice(v.total);
 
     const steps = ["confirmed", "cooking", "ready", "collected"];
     const fills = [12.5, 37.5, 62.5, 100];
-    const current = steps.indexOf(status);
+    const current = Math.max(0, steps.indexOf(v.status));
     document.querySelectorAll("#tracker [data-step]").forEach((el) => {
       const i = steps.indexOf(el.dataset.step);
       el.classList.toggle("is-done", i < current);
       el.classList.toggle("is-current", i === current);
     });
-    document.getElementById("tracker-fill").style.width = (fills[current] ?? 0) + "%";
+    document.getElementById("tracker-fill").style.width = fills[current] + "%";
     card.hidden = false;
   } else {
     card.hidden = true;
@@ -192,6 +186,7 @@ async function initHome() {
   document.getElementById("nearby").innerHTML =
     data.cafeterias.slice(0, 3).map((c) => renderCafeCard(c, false)).join("");
 }
+window.addEventListener("storage", (e) => { if (e.key === "ece_orders" && page === "home") initHome(); });
 
 /* ---------- Staff login ---------- */
 if (page === "staff-login") initStaffLogin();
