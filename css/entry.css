@@ -115,7 +115,7 @@
 /* ---------- Staff login extras ---------- */
 .auth__photo--staff {
   background:
-    url("../images/share_food.jpg") center / cover no-repeat,
+    url("../images/cafeterias/crous-express.jpg") center / cover no-repeat,
     var(--sand);
 }
 .auth-card__subtitle { margin-top: var(--space-2); text-align: center; font-size: var(--fs-md); font-weight: 500; }
