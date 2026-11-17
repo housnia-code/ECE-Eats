@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · ECE Eats Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/staff.css?v=3">
+</head>
+<body data-page="dashboard">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar" aria-label="Staff navigation">
+      <div class="brand">ECE EATS<br>Pro</div>
+      <nav class="nav">
+        <a href="dashboard.html" aria-current="page">Dashboard</a>
+        <a href="orders.html">Orders</a>
+        <a href="menu_managment.html">Menu management</a>
+      </nav>
+      <div class="sidebar-foot">
+        <button class="btn-dark" id="logout" type="button">Logout</button>
+        <div class="version">ECE Eats v2.4.0 • ECE Paris</div>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+      <span class="pill rest">Le CROUS Express</span>
+      <span class="pill live"><span aria-hidden="true">●</span> Lunch Service – Active</span>
+      <div class="top-icons"><span role="img" aria-label="Notifications">🔔</span><span role="img" aria-label="Profile">👤</span></div>
+    </header>
+
+    <main>
+      <h1>Hello Guillaume, Lunch Service Is Underway</h1>
+      <p class="sub">Here is where today's service stands.</p>
+
+      <section class="stats" aria-label="Today's figures">
+        <div class="stat">
+          <h2>Today's Orders</h2>
+          <div><span class="num" id="dToday">0</span><span class="badge">+18% vs yest</span></div>
+          <div class="note">Lunch Service Target: 310 orders</div>
+          <div class="bar" id="dBarWrap" role="progressbar" aria-label="Progress toward daily target" aria-valuemin="0" aria-valuemax="310"><span id="dBar"></span></div>
+        </div>
+        <div class="stat">
+          <h2>Active in Kitchen</h2>
+          <div class="num" id="dKitchen">0</div>
+          <div class="note" id="dWaiting"></div>
+        </div>
+        <div class="stat">
+          <h2>Ready Trays</h2>
+          <div class="num" id="dReady">00</div>
+          <div class="note">Ready for collection • Counter B</div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="qTitle">
+        <div class="panel-head">
+          <h2 id="qTitle">Live Express Queue</h2>
+          <span class="prio" id="dPrio">0 priorities</span>
+          <a href="orders.html">See <span id="dActiveCount">0</span> orders →</a>
+        </div>
+        <table>
+          <thead><tr><th>Ticket &amp; Student</th><th>Chosen menu</th><th>Pickup Time</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="queueBody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../js/staff.js?v=3"></script>
+</body>
+</html>

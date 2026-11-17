@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Eats – Home</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/entry.css">
+</head>
+<body data-page="home" data-nav="home" data-auth="student">
+
+  <header id="site-header"></header>
+
+  <main class="container home">
+    <section class="welcome">
+      <h1>Welcome back <span id="user-name">Alex</span>,</h1>
+      <p>What are you craving for today ?</p>
+    </section>
+
+    <section class="order-card" id="current-order" hidden>
+  <div class="order-card__head">
+    <h2>Your current order</h2>
+    <span id="order-meta"></span>
+    <span id="order-total" class="order-card__total"></span>
+  </div>
+  <p class="order-card__cafe" id="order-cafe"></p>
+  <p class="order-card__items" id="order-items"></p>
+
+  <div class="tracker" id="tracker">
+    <div class="tracker__icons">
+      <span data-step="confirmed"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span data-step="cooking"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v3a6 6 0 01-6 6h-4a6 6 0 01-6-6v-3z"/><path d="M2 11h20M9 3.5c0 1.5 1 1.5 1 3M14 3.5c0 1.5 1 1.5 1 3"/></svg></span>
+      <span data-step="ready"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg></span>
+      <span data-step="collected"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    </div>
+    <div class="tracker__bar"><span id="tracker-fill"></span></div>
+    <div class="tracker__labels">
+      <span data-step="confirmed">Confirmed</span>
+      <span data-step="cooking">Cooking</span>
+      <span data-step="ready">Ready</span>
+      <span data-step="collected">Collected</span>
+    </div>
+  </div>
+</section>
+
+    <div class="filter-row" id="categories">
+      <a class="filter-pill" href="cafeterias.html?q=Salad">Salad</a>
+      <a class="filter-pill" href="cafeterias.html?q=Sandwich">Sandwich</a>
+      <a class="filter-pill" href="cafeterias.html?q=Wrap">Wrap</a>
+      <a class="filter-pill" href="cafeterias.html?q=Vegan">Vegan</a>
+      <a class="filter-pill" href="cafeterias.html?q=Halal">Halal</a>
+    </div>
+
+    <section class="block">
+      <h2 class="block__title">Popular today</h2>
+      <div class="grid-3" id="popular"></div>
+    </section>
+
+    <section class="block">
+      <div class="block__head">
+        <h2 class="block__title">Nearby Cafeterias</h2>
+        <a class="link" href="cafeterias.html">See other cafeterias →</a>
+      </div>
+      <div class="grid-3" id="nearby"></div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/entry.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administration · ECE Eats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/staff.css?v=3">
+</head>
+<body data-page="admin">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar" aria-label="Admin navigation">
+      <div class="brand">ECE EATS<br>Admin</div>
+      <nav class="nav"><a href="admin.html" aria-current="page">Administration</a></nav>
+      <div class="sidebar-foot"><button class="btn-dark" id="logout" type="button">Logout</button><div class="version">ECE Eats v2.4.0 • ECE Paris</div></div>
+    </aside>
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+      <span class="pill rest">Campus administration</span>
+      <div class="top-icons"><span role="img" aria-label="Profile">👤</span></div>
+    </header>
+    <main>
+      <h1>Platform administration</h1>
+      <p class="sub">Users, restaurants and usage reports (static data).</p>
+
+      <section class="panel" aria-labelledby="t1"><div class="panel-head"><h2 id="t1">Users</h2></div>
+        <table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th></tr></thead><tbody>
+          <tr><td data-label="Name">Alex Costa</td><td data-label="Email">alex.costa@edu.ece.fr</td><td data-label="Role">Customer</td><td data-label="Status"><span class="status Ready">✓ Active</span></td></tr>
+          <tr><td data-label="Name">Eva Smith</td><td data-label="Email">eva.smith@edu.ece.fr</td><td data-label="Role">Customer</td><td data-label="Status"><span class="status Ready">✓ Active</span></td></tr>
+          <tr><td data-label="Name">Guillaume</td><td data-label="Email">guillaume@ece.fr</td><td data-label="Role">Restaurant Staff</td><td data-label="Status"><span class="status Ready">✓ Active</span></td></tr>
+        </tbody></table></section>
+      <br>
+      <section class="panel" aria-labelledby="t2"><div class="panel-head"><h2 id="t2">Restaurants</h2></div>
+        <table><thead><tr><th>Name</th><th>Campus</th><th>Rating</th><th>Status</th></tr></thead><tbody>
+          <tr><td data-label="Name">Le CROUS Express</td><td data-label="Campus">Eiffel 2</td><td data-label="Rating">4.6</td><td data-label="Status"><span class="status Ready">✓ Active</span></td></tr>
+          <tr><td data-label="Name">Le Café Eiffel</td><td data-label="Campus">Eiffel 1</td><td data-label="Rating">4.2</td><td data-label="Status"><span class="status Ready">✓ Active</span></td></tr>
+          <tr><td data-label="Name">Le Comptoir Défense</td><td data-label="Campus">Cœur Défense</td><td data-label="Rating">4.1</td><td data-label="Status"><span class="status Confirmed">⏸ Inactive</span></td></tr>
+        </tbody></table></section>
+      <br>
+      <section class="panel" aria-labelledby="t3"><div class="panel-head"><h2 id="t3">Usage reports</h2></div>
+        <table><thead><tr><th>Restaurant</th><th>Orders today</th><th>Peak hour</th></tr></thead><tbody>
+          <tr><td data-label="Restaurant">Le CROUS Express</td><td data-label="Orders today">248</td><td data-label="Peak hour">12h15</td></tr>
+          <tr><td data-label="Restaurant">Le Café Eiffel</td><td data-label="Orders today">173</td><td data-label="Peak hour">12h30</td></tr>
+          <tr><td data-label="Restaurant">Le Comptoir Défense</td><td data-label="Orders today">0</td><td data-label="Peak hour">-</td></tr>
+        </tbody></table></section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../js/staff.js?v=3"></script>
+</body>
+</html>

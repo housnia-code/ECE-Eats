@@ -1,0 +1,149 @@
+/* ==========================================================
+   COMMON JS (owner: A): shared helpers, student nav bar, footer
+   Pages need: <body data-nav="home|cafeterias|orders" data-auth="student">
+               <header id="site-header"></header> ... <footer id="site-footer"></footer>
+   Shared storage keys (agree with B and C):
+     ece_session : { name, email, role }
+     ece_tray    : [ { id, qty } ]   (B)
+     ece_orders  : [ { id, cafeteriaId, items, total, pickup, status, createdAt } ]  (B writes, C updates status)
+   ========================================================== */
+
+const IN_SUBFOLDER = ["/main/", "/student/", "/staff/"].some((p) => location.pathname.includes(p));
+const BASE = IN_SUBFOLDER ? "../" : "./";
+
+/* ---------- Data and formatting ---------- */
+let _dataPromise = null;
+function loadData() {
+  if (!_dataPromise) _dataPromise = fetch(BASE + "data/data.json").then((r) => r.json());
+  return _dataPromise;
+}
+function formatPrice(n) { return n.toFixed(2).replace(".", ",") + " €"; }
+function getJSON(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; }
+}
+
+/* ---------- Session ---------- */
+function getSession() { return getJSON("ece_session", null); }
+function logout() { localStorage.removeItem("ece_session"); window.location.href = BASE + "index.html"; }
+function requireLogin() {
+  if (document.body.dataset.auth === "student" && !getSession()) window.location.href = BASE + "index.html";
+}
+
+/* ---------- Icons ---------- */
+const ICONS = {
+  search: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
+  cart: '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM3 2v2h2l3.6 7.6-1.4 2.4A2 2 0 009 17h11v-2H9.4l1-1.8h7.2a2 2 0 001.7-1l3.6-6.5A1 1 0 0022 5H6.2l-.9-3H3z"/></svg>',
+  user: '<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 4a3.5 3.5 0 110 7 3.5 3.5 0 010-7zm0 14a8 8 0 01-6-2.7c.1-2 4-3.1 6-3.1s5.9 1.1 6 3.1A8 8 0 0112 20z"/></svg>',
+  menu: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
+};
+
+/* ---------- Nav bar ---------- */
+function renderNav() {
+  const el = document.getElementById("site-header");
+  if (!el) return;
+  const active = document.body.dataset.nav;
+  const link = (key, label, href) =>
+    `<a class="nav-pill${active === key ? " is-active" : ""}" href="${BASE}${href}">${label}</a>`;
+  const trayCount = getJSON("ece_tray", []).reduce((n, i) => n + (i.quantity ?? i.qty ?? 0), 0);
+
+  el.className = "navbar";
+  el.innerHTML = `
+    <a class="navbar__logo" href="${BASE}main/home.html">ECE EATS</a>
+    <nav class="navbar__links" id="nav-links">
+      ${link("home", "Home", "main/home.html")}
+      ${link("cafeterias", "Cafeterias", "main/cafeterias.html")}
+      ${link("orders", "My Orders", "student/my_orders.html")}
+    </nav>
+    <div class="navbar__actions">
+      <form class="search-pill" id="nav-search" role="search">
+        ${ICONS.search}<input type="search" placeholder="Search" aria-label="Search cafeterias">
+      </form>
+      <a class="icon-btn" href="${BASE}student/checkout.html" aria-label="Cart">
+        ${ICONS.cart}${trayCount ? `<span class="badge">${trayCount}</span>` : ""}
+      </a>
+      <div class="user-wrap">
+        <button class="icon-btn" id="user-btn" aria-label="Account" aria-expanded="false">${ICONS.user}</button>
+        <div class="user-menu" id="user-menu">
+          <p class="user-menu__name">${getSession()?.name ?? "Guest"}</p>
+          <button type="button" id="logout-btn">Log out</button>
+        </div>
+      </div>
+      <button class="navbar__toggle" id="nav-toggle" aria-label="Menu">${ICONS.menu}</button>
+    </div>`;
+
+  document.getElementById("nav-toggle").addEventListener("click", () =>
+    document.getElementById("nav-links").classList.toggle("is-open"));
+  const menu = document.getElementById("user-menu");
+  document.getElementById("user-btn").addEventListener("click", (e) => { e.stopPropagation(); menu.classList.toggle("is-open"); });
+  document.addEventListener("click", () => menu.classList.remove("is-open"));
+  document.getElementById("logout-btn").addEventListener("click", logout);
+  document.getElementById("nav-search").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = e.target.querySelector("input").value.trim();
+    window.location.href = BASE + "main/cafeterias.html" + (q ? "?q=" + encodeURIComponent(q) : "");
+  });
+}
+
+/* ---------- Footer ---------- */
+function renderFooter() {
+  const el = document.getElementById("site-footer");
+  if (!el) return;
+  el.className = "footer";
+  el.innerHTML = `
+    <div class="container">
+      <div class="footer__grid">
+        <div><h4>ECE EATS</h4>
+          <p>Official ECE Paris Campus Dining Platform. Quick student meal ordering and nutritional information tracking.</p></div>
+        <div><h4>Site Campus</h4>
+          <ul><li>Campus Eiffel 1 — 10 Rue Sextius Michel, 75015</li>
+              <li>Campus Eiffel 2 — 37 Quai de Grenelle, 75015</li>
+              <li>Campus Cœur Défense — Tour A, 92400 Courbevoie</li></ul></div>
+        <div><h4>Support &amp; Maintenance</h4>
+          <p>Catering &amp; Facilities Office: Building E1, Office 104<br>Office Hours: 8:30 AM – 5:00 PM</p></div>
+      </div>
+      <p class="footer__legal">© 2026 École Centrale d’Électronique (ECE Paris). ECE Eats Connected Dining System</p>
+    </div>`;
+}
+
+/* Refresh the cart badge in the nav bar (called by the tray code after every change) */
+function updateCartBadge() {
+  const n = getJSON("ece_tray", []).reduce((s, i) => s + (i.quantity ?? i.qty ?? 0), 0);
+  const link = document.querySelector('.navbar__actions a[aria-label="Cart"]');
+  if (!link) return;
+  let badge = link.querySelector(".badge");
+  if (!n) { if (badge) badge.remove(); return; }
+  if (!badge) { badge = document.createElement("span"); badge.className = "badge"; link.appendChild(badge); }
+  badge.textContent = n;
+}
+
+/* ---------- Orders: shared helpers (format = the staff pages' format) ---------- */
+function orderView(o, cafes) {
+  const cafe = (cafes || []).find((c) => c.id === o.cafeteriaId);
+  const items = Array.isArray(o.items) ? o.items.map((i) => `${i.qty}× ${i.name}`).join(" + ") : (o.items || "");
+  const total = o.total != null ? Number(o.total)
+    : (Array.isArray(o.items) ? o.items.reduce((s, i) => s + i.qty * i.price, 0) : 0);
+  return { id: o.id, cafeteria: o.cafeteria || (cafe && cafe.name) || "", place: o.place || "",
+           time: o.orderedAt || o.time || "", pickup: o.pickupTime || "", items, total,
+           status: String(o.status || "confirmed").toLowerCase() };
+}
+
+const TRACK_ICONS = [
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v3a6 6 0 01-6 6h-4a6 6 0 01-6-6v-3z"/><path d="M2 11h20M9 3.5c0 1.5 1 1.5 1 3M14 3.5c0 1.5 1 1.5 1 3"/></svg>',
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>',
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+];
+function trackerHTML(status) {
+  const steps = ["confirmed", "cooking", "ready", "collected"];
+  const labels = ["Confirmed", "Cooking", "Ready", "Collected"];
+  const fills = [12.5, 37.5, 62.5, 100];
+  const current = Math.max(0, steps.indexOf(String(status).toLowerCase()));
+  const cls = (i) => (i < current ? "is-done" : i === current ? "is-current" : "");
+  return `<div class="tracker">
+    <div class="tracker__icons">${TRACK_ICONS.map((ic, i) => `<span class="${cls(i)}">${ic}</span>`).join("")}</div>
+    <div class="tracker__bar"><span style="width:${fills[current]}%"></span></div>
+    <div class="tracker__labels">${labels.map((l, i) => `<span class="${cls(i)}">${l}</span>`).join("")}</div>
+  </div>`;
+}
+
+document.addEventListener("DOMContentLoaded", () => { requireLogin(); renderNav(); renderFooter(); });

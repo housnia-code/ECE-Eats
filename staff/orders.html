@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Orders · ECE Eats Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/staff.css?v=3">
+</head>
+<body data-page="orders">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar" aria-label="Staff navigation">
+      <div class="brand">ECE EATS<br>Pro</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="orders.html" aria-current="page">Orders</a>
+        <a href="menu_managment.html">Menu management</a>
+      </nav>
+      <div class="sidebar-foot">
+        <button class="btn-dark" id="logout" type="button">Logout</button>
+        <div class="version">ECE Eats v2.4.0 • ECE Paris</div>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+      <span class="pill rest">Le CROUS Express</span>
+      <span class="pill live"><span aria-hidden="true">●</span> Lunch Service – Active</span>
+      <div class="top-icons"><span role="img" aria-label="Notifications">🔔</span><span role="img" aria-label="Profile">👤</span></div>
+    </header>
+
+    <main>
+      <div class="counters" aria-label="Order counters">
+        <div class="counter"><b id="cQueue">0</b><span>Queue</span></div>
+        <div class="counter"><b id="cKitchen">0</b><span>In Kitchen</span></div>
+        <div class="counter"><b id="cReady">0</b><span>Ready</span></div>
+      </div>
+      <h1>Live Orders &amp; Status Management</h1>
+      <p class="sub">Monitor lunch service demand, update preparation statuses instantly, and notify students at pickup counters.</p>
+
+      <div class="tools">
+        <label class="sr-only" for="search">Search orders by number</label>
+        <input class="search" id="search" type="search" placeholder="Search orders">
+        <div id="filters" role="group" aria-label="Filter by status" style="display:contents"></div>
+      </div>
+
+      <section class="orders" id="orderList" aria-live="polite"></section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../js/staff.js?v=3"></script>
+</body>
+</html>
